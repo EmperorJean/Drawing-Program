@@ -1,0 +1,33 @@
+# STANDUP 01 - 2/9/2023 TEAM SWARTHMORE
+
+General Update and Intro
+====================================================================
+- Teams assembled and introduced, selected Project Leaders: Jean and Richard
+- Talked to TA and client
+- Figured out which tools we are gonna be using and learning (WebGl, ThreeJs/XTK and NodeJs)
+- Played around with 10 PRINT 3D (goxtk.com)
+- Looked over framework on fundamentals 
+
+Draft of Requirements
+=====================================================================
+- Have a dashboard where people can select different settings that generates a 3d art using an algorithm
+- We will need to design 3 algorithms that generate 3D art that can be started, paused, and reset.
+- A digital canvas that can be drawn to using client-side js and node js. 
+- Drawing must happen within a web browser on a client’s device without networking, or in a terminal with node js.
+- Provide a full spec of drawing commands to be used on the digital canvas.
+
+For technologies we propose:
+- WebGL for drawing 3D shapes on a 2D canvas.
+- ThreeJs/XTK for connecting the WebGL art to the browser
+- NodeJS and headless-gl for connecting the WebGL art to the terminal
+
+
+Current Questions / Problems / Something you need
+=====================================================================
+- We need a better understanding of 3D art generation to understand what is and isn’t possible
+- We need to explore algorithms that have already been explored in 3D art generation to avoid recreating something that already exists
+
+
+List of Working Packages with responsible Student and Completion Dates
+- Explore WebGL/XTK cube tutorial 00-03 [Jean, Jake, Richard, Prateeksha] by 2/12
+

@@ -18,7 +18,7 @@ algSphere.drawOneStep = function () {
     let x = Math.floor(width * Math.random());
     let y = Math.floor(width * Math.random());
     let z = Math.floor(width * Math.random());
-    algSphere.drawSphere(x, y, z, 15, [1, 1, 1]);
+    algSphere.drawSphere(x, y, z, algSphere.sphereRadius, algSphere.sphereColor);
     algSphere.numOfSteps++;
 }
 

@@ -34,7 +34,8 @@
     <button class="drawred" onclick="reset()">Reset</button>
     <select id="select-algorithm" onchange="changeSelection()">
       <option value="1">Algs3D (Jean's Revision)</option>
-      <option value="2">AlgsMolecular (Jean)</option>
+      <option value="2">AlgsMolecularNice (Jean)</option>
+      <option value="3">AlgsMolecularMean (Jean)</option>
     </select>
     <br><br>
     <button class="drawred" onclick="clearCanvas()">Clear Canvas</button>
@@ -47,6 +48,7 @@
   <script src="algsSphere.js"></script>
   <script src="algsSphere_Params.js"></script>
   <script src="algsMolecular.js"></script>
+  <script src="algsMolecular2.js"></script>
   <script src="algsMolecular_Params.js"></script>
 
   <script>
@@ -68,7 +70,7 @@ r.camera.position = [0, 1500, 0];
   </script>
   <script>
     // Algorithms set up
-    var algorithms = [algSphere, algsMolecular];
+    var algorithms = [algSphere, algsMolecular, algsMolecular2];
     var algorithmsPaused = [];
     for (let i = 0; i < algorithms.length; i++) {
       algorithms[i].initialize();
@@ -118,6 +120,7 @@ r.camera.position = [0, 1500, 0];
       r.width = width;
       r.height = height;
       r.init();
+      r.camera.position = [0, 1500, 0];
     }
     // Save canvas as jpg
     function saveCanvas() {

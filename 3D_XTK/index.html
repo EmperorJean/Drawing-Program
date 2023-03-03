@@ -34,6 +34,7 @@
     <button class="drawred" onclick="reset()">Reset</button>
     <select id="select-algorithm" onchange="changeSelection()">
       <option value="1">Algs3D (Jean's Revision)</option>
+      <option value="2">AlgsMolecular (Jean)</option>
     </select>
     <br><br>
     <button class="drawred" onclick="clearCanvas()">Clear Canvas</button>
@@ -45,6 +46,8 @@
 
   <script src="algsSphere.js"></script>
   <script src="algsSphere_Params.js"></script>
+  <script src="algsMolecular.js"></script>
+  <script src="algsMolecular_Params.js"></script>
 
   <script>
     // Canvas
@@ -62,7 +65,7 @@
   </script>
   <script>
     // Algorithms set up
-    var algorithms = [algSphere];
+    var algorithms = [algSphere, algsMolecular];
     var algorithmsPaused = [];
     for (let i = 0; i < algorithms.length; i++) {
       algorithms[i].initialize();

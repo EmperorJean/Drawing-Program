@@ -61,7 +61,10 @@
     r.container = "myDiv"
     r.width = width;
     r.height = height;
+    
     r.init();
+    
+r.camera.position = [0, 1500, 0];
   </script>
   <script>
     // Algorithms set up
@@ -72,7 +75,7 @@
       algorithmsPaused.push(true);
     }
     // Algorithm selection set up
-    var currentSelection = 1;
+    var currentSelection = 2;
     document.getElementById("select-algorithm").value = currentSelection;
     // Functions for user interaction
     function changeSelection() {

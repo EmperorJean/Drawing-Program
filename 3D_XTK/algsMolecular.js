@@ -2,7 +2,7 @@ var r;
 var algsMolecular = {}
 var numNodes = 0;
 let lastCoords = null;
-let visitedCoors = [0,0,0]
+let visitedCoors = [0,0,0];
 
 algsMolecular.drawSphere = function (x, y, z, radius, color) {
     s = new X.sphere();

@@ -1,6 +1,6 @@
 /* Parameters */
 algsMolecular.speed = 0;
-algsMolecular.maxNumOfSteps = 100;
+algsMolecular.maxNumOfSteps = 50;
 algsMolecular.sphereRadiusMax = 20;
 algsMolecular.sphereRadiusMin = 15;
 algsMolecular.maxLineLength = 50;

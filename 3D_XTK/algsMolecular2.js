@@ -22,7 +22,7 @@ algsMolecular2.drawLine = function(start, end)
     cylinder = new X.cylinder();
     cylinder.start = start;
     cylinder.end = end;
-    cylinder.radius = algsMolecular.lineThickness;
+    cylinder.radius = algsMolecular2.lineThickness;
     cylinder.color = [1, 1, 1];
     cylinder.caption = 'cylinder 2';
     lastCoords2 = end;
@@ -30,7 +30,7 @@ algsMolecular2.drawLine = function(start, end)
 }
 
 algsMolecular2.drawOneStep = function () {
-    if (algsMolecular.numOfSteps >= algsMolecular.maxNumOfSteps) {
+    if (algsMolecular2.numOfSteps >= algsMolecular2.maxNumOfSteps) {
         clearInterval(algsMolecular2.loop);
         return false;
     }
@@ -38,8 +38,8 @@ algsMolecular2.drawOneStep = function () {
     let x = Math.floor((width + 500) * Math.random());
     let y = Math.floor((width + 500) * Math.random());
     let z = Math.floor((width + 500) * Math.random());
-    algsMolecular2.drawSphere(x, y, z, algsMolecular.sphereRadiusMax, algsMolecular.sphereColor);
-    algsMolecular.numOfSteps++;
+    algsMolecular2.drawSphere(x, y, z, algsMolecular2.sphereRadiusMax, algsMolecular2.sphereColor);
+    algsMolecular2.numOfSteps++;
 }
 
 
@@ -47,7 +47,7 @@ algsMolecular2.reset = function () {
     // Check if already running
     algsMolecular2.pause();
     // Initialize values
-    algsMolecular.numOfSteps = 0;
+    algsMolecular2.numOfSteps = 0;
 }
 
 algsMolecular2.initialize = function () {
@@ -60,5 +60,5 @@ algsMolecular2.pause = function () {
     }
 }
 algsMolecular2.start = function () {
-    algsMolecular2.loop = setInterval(algsMolecular2.drawOneStep, algsMolecular.speed);
+    algsMolecular2.loop = setInterval(algsMolecular2.drawOneStep, algsMolecular2.speed);
 }

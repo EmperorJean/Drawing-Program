@@ -1,7 +1,7 @@
 /* Parameters */
-neoCity.citySize = 50;
-neoCity.maxNumOfSteps = 50;
-neoCity.maxHeight = 250;
-neoCity.buildingSize = 20;
+neoCity.maxNumOfSteps = 200;
+neoCity.maxHeight = 50;
+neoCity.buildingSize = 10;
 neoCity.spacing = 1.2;
 neoCity.speed = 0;
+neoCity.citySize =Math.floor(Math.sqrt(neoCity.maxNumOfSteps));

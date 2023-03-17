@@ -59,12 +59,9 @@
 		var height = 600
 
 		camera = new PerspectiveCamera(45, width / height, 1, 1000);
-		camera.position.set(-100, 500, -100);
-		camera.lookAt(-100, -100, -1000)
+		camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
 
 		scene = new Scene();
-		const light = new AmbientLight(0xFFFFFF); // soft white light
-		scene.add(light);
 		// Canvas
 
 
@@ -76,21 +73,8 @@
 
 		const controls = new OrbitControls(camera, renderer.domElement);
 		document.getElementById("myDiv").appendChild(renderer.domElement);
-		controls.target.set(0, 450, 0);
+		controls.target.set(0, neoCity.maxHeight + 50, 0);
 		controls.update();
-
-		stats = new Stats();
-		//document.body.appendChild(stats.dom);
-		function onWindowResize() {
-
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-
-			renderer.setSize(window.innerWidth, window.innerHeight);
-
-		}
-
-		
 
 	</script>
 	<script>
@@ -136,16 +120,28 @@
 		// Clear canvas
 		function clearCanvas() {
 			// reset
+			
 			reset();
-			// destroy old renderer
-			r.destroy();
-			// create and initialize a 3D renderer
-			r = new X.renderer3D();
-			r.container = "myDiv"
-			r.width = width;
-			r.height = height;
-			r.init();
-			r.camera.position = [0, 1500, 0];
+
+			while (scene.children.length > 0) {
+				const child = scene.children[0];
+				scene.remove(child);
+
+				// Dispose of any materials, geometries, or textures associated with the child object
+				if (child.geometry) {
+					child.geometry.dispose();
+				}
+				if (child.material) {
+					child.material.dispose();
+				}
+				if (child.texture) {
+					child.texture.dispose();
+				}
+			}
+
+			algorithms[currentSelection - 1].initialize();
+
+			reset();
 		}
 		// Save canvas as jpg
 		function saveCanvas() {

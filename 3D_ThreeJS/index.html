@@ -1,13 +1,162 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<script type = "module" src="./test.js"></script>
-	</body>
+<html lang="en">
+
+<head>
+	<title>Algorithmically Generated Visual Designs</title>
+	<meta name="author" content="Co-authored by Alyssa Zhang, Maya Newman-Toker, John Mancini, and Michael Wehar">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=650">
+	<link rel="stylesheet" href="styles.css">
+
+	<script src="./three.module.js"></script>
+	<script src="./three/addons/OrbitControls.js"></script>
+	<script src="./three/addons/stats.module.js"></script>
+
+</head>
+
+<body>
+	<!-- Header -->
+	<div class="header">
+		<a href="https://github.com/Algorithmically-Generated-Artwork/Drawing-Program" class="logo">Algorithmically
+			Generated Visual Designs</a>
+		<div class="header-right">
+			<a class="logo" href="https://github.com/Algorithmically-Generated-Artwork">GitHub Repositories</a>
+		</div>
+	</div>
+
+	<br>
+	<div id="myDiv" class="bordered-content" style="width:600px; height:600px; margin:auto;"></div>
+	<canvas hidden id="myCanvas" style="background-color:white;"" width=" 600" height="600">Your browser does not
+		support
+		the HTML5 canvas tag.</canvas>
+	<br>
+
+	<div class="center">
+		<button id="startButton" class="drawred" onclick="start()">Start</button>
+		<button class="drawred" onclick="reset()">Reset</button>
+		<select id="select-algorithm" onchange="changeSelection()">
+			<option value="1">NeoCity (Jean)</option>
+		</select>
+		<br><br>
+		<button class="drawred" onclick="clearCanvas()">Clear Canvas</button>
+		<button class="savecanvas" onclick="saveCanvas()">Save Image</button>
+	</div>
+
+	<!-- This is for downloading the canvas as an image -->
+	<a id="link"></a>
+
+	<script src="neoCity.js"></script>
+	<script src="neoCity_Params.js"></script>
+
+	<script>
+
+		let camera, scene, renderer, stats;
+
+		var c = document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		// Dimensions
+		var width = 600
+		var height = 600
+
+		camera = new PerspectiveCamera(45, width / height, 1, 1000);
+		camera.position.set(-100, 500, -100);
+		camera.lookAt(-100, -100, -1000)
+
+		scene = new Scene();
+		const light = new AmbientLight(0xFFFFFF); // soft white light
+		scene.add(light);
+		// Canvas
+
+
+		renderer = new WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+		renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(width, height);
+		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = BasicShadowMap;
+
+		const controls = new OrbitControls(camera, renderer.domElement);
+		document.getElementById("myDiv").appendChild(renderer.domElement);
+		controls.target.set(0, 450, 0);
+		controls.update();
+
+		stats = new Stats();
+		//document.body.appendChild(stats.dom);
+		function onWindowResize() {
+
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+
+			renderer.setSize(window.innerWidth, window.innerHeight);
+
+		}
+
+		
+
+	</script>
+	<script>
+		// Algorithms set up
+		var algorithms = [neoCity];
+		var algorithmsPaused = [];
+		for (let i = 0; i < algorithms.length; i++) {
+			algorithms[i].initialize();
+			algorithmsPaused.push(true);
+		}
+		// Algorithm selection set up
+		var currentSelection = 1;
+		document.getElementById("select-algorithm").value = currentSelection;
+		// Functions for user interaction
+		function changeSelection() {
+			currentSelection = document.getElementById("select-algorithm").value;
+			if (algorithmsPaused[currentSelection - 1]) {
+				document.getElementById("startButton").innerHTML = "Start";
+			} else {
+				document.getElementById("startButton").innerHTML = "Pause";
+			}
+		}
+		// Start or pause selected algorithm
+		function start() {
+			if (algorithmsPaused[currentSelection - 1]) {
+				algorithms[currentSelection - 1].start();
+				document.getElementById("startButton").innerHTML = "Pause";
+				console.log("Started " + currentSelection);
+			} else {
+				algorithms[currentSelection - 1].pause();
+				document.getElementById("startButton").innerHTML = "Start";
+				console.log("Paused " + currentSelection);
+			}
+			algorithmsPaused[currentSelection - 1] = !algorithmsPaused[currentSelection - 1];
+		}
+		// Reset selected algorithm
+		function reset() {
+			algorithms[currentSelection - 1].reset();
+			document.getElementById("startButton").innerHTML = "Start";
+			algorithmsPaused[currentSelection - 1] = true;
+			console.log("Reset " + currentSelection);
+		}
+		// Clear canvas
+		function clearCanvas() {
+			// reset
+			reset();
+			// destroy old renderer
+			r.destroy();
+			// create and initialize a 3D renderer
+			r = new X.renderer3D();
+			r.container = "myDiv"
+			r.width = width;
+			r.height = height;
+			r.init();
+			r.camera.position = [0, 1500, 0];
+		}
+		// Save canvas as jpg
+		function saveCanvas() {
+			var link = document.getElementById('link');
+			ctx.drawImage(document.querySelector("canvas"), 0, 0);
+			link.setAttribute('download', 'visualdesign.jpg');
+			link.setAttribute('href', c.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"));
+			link.click();
+			ctx.clearRect(0, 0, width, height);
+		}
+	</script>
+</body>
+
 </html>

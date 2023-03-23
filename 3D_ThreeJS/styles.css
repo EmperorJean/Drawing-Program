@@ -133,15 +133,16 @@
 }
 
 .sliderContainer {
-  background-color: red;
-  width: 50rem;
-  background-color: black;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.116);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 1rem;
   border-radius: 1rem;
-  align-self: center;
+  position: absolute;
+  top: 5rem;
+  left: 0;
 }
 
 .sliderContainer input {

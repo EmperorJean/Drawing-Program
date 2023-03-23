@@ -131,3 +131,21 @@
 .center {
   text-align: center;
 }
+
+.sliderContainer {
+  background-color: red;
+  width: 50rem;
+  background-color: black;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  align-self: center;
+}
+
+.sliderContainer input {
+
+}
+
+/* FOR EDITING ONLY. DELETE AFTER */

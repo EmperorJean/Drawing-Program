@@ -1,6 +1,7 @@
 var neoCity = {};
 let map = [];
-
+let animationStarted = false;
+			
 let i, j;
 neoCity.initialize = function  () {
 	i = 0;
@@ -8,6 +9,9 @@ neoCity.initialize = function  () {
 	neoCity.reset();
 
 
+	if(!animationStarted){
+	animate()
+	}
 	// let s = Math.floor(Math.sqrt(neoCity.maxNumOfSteps)) * (neoCity.buildingSize + neoCity.spacing)
 	// const geometry = new BoxGeometry(s,neoCity.maxHeight,s );
 
@@ -28,7 +32,8 @@ neoCity.initialize = function  () {
 
 
 neoCity.drawOneStep = function () {
-	if(neoCity.numOfSteps > neoCity.maxNumOfSteps)
+	radius = (neoCity.citySize + neoCity.spacing) * (neoCity.citySize + + neoCity.spacing);
+	if(neoCity.numOfSteps >= neoCity.maxNumOfSteps)
 	{
 		clearInterval(neoCity.loop)
 		console.log("Completed")
@@ -36,7 +41,6 @@ neoCity.drawOneStep = function () {
 	}
 	let obj = neoCity.drawBuilding(neoCity.buildingSize, neoCity.maxHeight, neoCity.spacing)
 	scene.add(obj)
-	animate()
 	neoCity.numOfSteps++;
 }
 neoCity.drawBuilding = function(width, height, spacing) {
@@ -70,6 +74,9 @@ neoCity.pause = function () {
 }
 
 neoCity.start = function () {
+	camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
+	controls.target.set(0, neoCity.maxHeight + 50, 0);
+		controls.update();
 	const geometry = new BufferGeometry();
 	const vertices = [];
 
@@ -90,7 +97,7 @@ neoCity.start = function () {
 
 
 function animate() {
-
+	animationStarted = true;
 	requestAnimationFrame(animate);
 	render();
 
@@ -101,6 +108,79 @@ function render() {
 	let time = performance.now() * 0.001;
 	time += 10000;	
 	renderer.render(scene, camera);
+	let spd = .5;
+
+
+	if(neoCity.scrolling)
+	{
+
+	camera.position.x += spd;
+	camera.position.z += spd
+	}
 	//stats.update();
 
+}
+
+
+
+
+
+
+
+
+// TEMPORARY FOR EDITING ONLY
+const maxNumOfSteps = document.getElementById("maxNumOfSteps");
+const maxNumOfStepsValue = document.getElementById("maxNumOfStepsValue");
+
+const maxHeight = document.getElementById("maxHeight");
+const maxHeightValue = document.getElementById("maxHeightValue");
+
+const buildingSize = document.getElementById("buildingSize");
+const buildingSizeValue = document.getElementById("buildingSizeValue");
+
+const spacing = document.getElementById("spacing");
+const spacingValue = document.getElementById("spacingValue");
+
+const citySize = document.getElementById("citySizeValue");
+citySize.innerHTML = parseFloat(neoCity.citySize);
+
+const scrollin = document.getElementById("scrolling");
+
+maxNumOfStepsValue.innerHTML = maxNumOfSteps.value;
+maxHeightValue.innerHTML = maxHeight.value;
+buildingSizeValue.innerHTML = parseFloat(buildingSize.value);
+spacingValue.innerHTML = spacing.value;
+
+maxNumOfSteps.oninput = function() {
+    maxNumOfStepsValue.innerHTML = this.value;
+    neoCity.maxNumOfSteps = parseInt(this.value);
+	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
+}
+
+scrollin.oninput = function() {
+	if(this.checked)
+	{
+		neoCity.scrolling = 1;
+	console.log(neoCity.scrolling)
+	}else{
+		neoCity.scrolling = 0;
+	console.log(neoCity.scrolling)
+	}
+}
+maxHeight.oninput = function() {
+    maxHeightValue.innerHTML = this.value;
+    neoCity.maxHeight = parseInt(this.value);
+	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
+}
+
+buildingSize.oninput = function() {
+    buildingSizeValue.innerHTML = this.value;
+    neoCity.buildingSize = parseInt(this.value);
+	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
+}
+
+spacing.oninput = function() {
+    spacingValue.innerHTML = this.value;
+    neoCity.spacing = parseInt(this.value);
+	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
 }

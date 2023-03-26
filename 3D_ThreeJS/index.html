@@ -36,6 +36,7 @@
 		<button class="drawred" onclick="reset()">Reset</button>
 		<select id="select-algorithm" onchange="changeSelection()">
 			<option value="1">NeoCity (Jean)</option>
+			<option value="2">Conway (Jake)</option>
 		</select>
 		<br><br>
 		<button class="drawred" onclick="clearCanvas()">Clear Canvas</button>
@@ -47,6 +48,8 @@
 
 	<script src="neoCity.js"></script>
 	<script src="neoCity_Params.js"></script>
+	<script src="conway.js"></script>
+	<script src="conway_params.js"></script>
 
 	<script>
 
@@ -79,7 +82,7 @@
 	</script>
 	<script>
 		// Algorithms set up
-		var algorithms = [neoCity];
+		var algorithms = [neoCity, conway];
 		var algorithmsPaused = [];
 		for (let i = 0; i < algorithms.length; i++) {
 			algorithms[i].initialize();

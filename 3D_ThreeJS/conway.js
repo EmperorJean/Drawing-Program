@@ -55,7 +55,9 @@ conway.drawOneStep = function () {
 		for (let y = 0; y < conway.worldSize; y++) {
 			for (let z = 0; z < conway.worldSize; z++) {
 				// if the cube is alive it will become visible
-				world[x][y][z].cube.visible = world[x][y][z].isAlive;
+				if (world[x][y][z].cube.visible != world[x][y][z].isAlive) {
+					world[x][y][z].cube.visible = world[x][y][z].isAlive;
+				}
 				// calculate next step
 				world[x][y][z].isAlive = conway.isAliveNextStep(x, y, z);
 			}

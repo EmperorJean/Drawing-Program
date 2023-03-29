@@ -1,6 +1,6 @@
 var algDots = {};
 
-algDots.drawCircle = function (x, y, radius, color, alpha) {
+algDots.drawCircle = function(x, y, radius, color, alpha) {
   ctx.globalAlpha = alpha;
   ctx.fillStyle = color;
   ctx.beginPath();
@@ -9,7 +9,7 @@ algDots.drawCircle = function (x, y, radius, color, alpha) {
 }
 
 algDots.drawOneStep = function () {
-  if (algDots.numOfSteps > algDots.maxNumOfSteps) {
+  if(algDots.numOfSteps > algDots.maxNumOfSteps) {
     clearInterval(algDots.loop);
     return false;
   } else {
@@ -27,12 +27,12 @@ algDots.reset = function () {
   algDots.numOfSteps = 0;
 }
 
-algDots.initialize = function () {
+algDots.initialize = function() {
   algDots.reset();
 }
 
 algDots.pause = function () {
-  if ("loop" in algDots) {
+  if("loop" in algDots) {
     clearInterval(algDots.loop);
   }
 }

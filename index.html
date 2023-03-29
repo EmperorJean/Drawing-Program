@@ -12,6 +12,9 @@
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css?ver=4">
+    <script src="./three.module.js"></script>
+	<script src="./three/addons/OrbitControls.js"></script>
+	<script src="./three/addons/stats.module.js"></script>
 </head>
 
 <body>
@@ -298,12 +301,30 @@
     <a id="linkParams" style="display: none"></a>
 
     <script>
+
+        // 3D Stuff
+        let camera, scene, renderer, stats;
+
         // Canvas
         var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
+        var ctx = ""
         // Dimensions
         var width = c.width;
         var height = c.height;
+
+        // More 3D Stuff
+        camera = new PerspectiveCamera(45, width / height, 1, 1000);
+		
+		scene = new Scene();
+
+        renderer = new WebGLRenderer({ canvas: myCanvas,antialias: true, preserveDrawingBuffer: true  });
+        renderer.setPixelRatio(window.devicePixelRatio);
+		renderer.setSize(width, height);
+		renderer.shadowMap.enabled = true;
+		renderer.shadowMap.type = BasicShadowMap;
+
+        const controls = new OrbitControls(camera, myCanvas);
+	
     </script>
     <script src="algDots.js"></script>
     <script src="algDots_params.js"></script>
@@ -311,6 +332,8 @@
     <script src="algGP_params.js"></script>
     <script src="algVines.js"></script>
     <script src="algVines_params.js"></script>
+	<script src="neoCity.js"></script>
+	<script src="neoCity_Params.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

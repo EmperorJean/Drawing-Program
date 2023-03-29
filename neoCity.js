@@ -6,6 +6,10 @@ let i, j;
 neoCity.initialize = function  () {
 	i = 0;
 	j = 0;
+	camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
+
+	// controls.target.set(0, neoCity.maxHeight + 50, 0);
+	// controls.update();
 	neoCity.reset();
 
 
@@ -124,63 +128,3 @@ function render() {
 
 
 
-
-
-
-
-// TEMPORARY FOR EDITING ONLY
-const maxNumOfSteps = document.getElementById("maxNumOfSteps");
-const maxNumOfStepsValue = document.getElementById("maxNumOfStepsValue");
-
-const maxHeight = document.getElementById("maxHeight");
-const maxHeightValue = document.getElementById("maxHeightValue");
-
-const buildingSize = document.getElementById("buildingSize");
-const buildingSizeValue = document.getElementById("buildingSizeValue");
-
-const spacing = document.getElementById("spacing");
-const spacingValue = document.getElementById("spacingValue");
-
-const citySize = document.getElementById("citySizeValue");
-citySize.innerHTML = parseFloat(neoCity.citySize);
-
-const scrollin = document.getElementById("scrolling");
-
-maxNumOfStepsValue.innerHTML = maxNumOfSteps.value;
-maxHeightValue.innerHTML = maxHeight.value;
-buildingSizeValue.innerHTML = parseFloat(buildingSize.value);
-spacingValue.innerHTML = spacing.value;
-
-maxNumOfSteps.oninput = function() {
-    maxNumOfStepsValue.innerHTML = this.value;
-    neoCity.maxNumOfSteps = parseInt(this.value);
-	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
-}
-
-scrollin.oninput = function() {
-	if(this.checked)
-	{
-		neoCity.scrolling = 1;
-	console.log(neoCity.scrolling)
-	}else{
-		neoCity.scrolling = 0;
-	console.log(neoCity.scrolling)
-	}
-}
-maxHeight.oninput = function() {
-    maxHeightValue.innerHTML = this.value;
-    neoCity.maxHeight = parseInt(this.value);
-	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
-}
-
-buildingSize.oninput = function() {
-    buildingSizeValue.innerHTML = this.value;
-    neoCity.buildingSize = parseInt(this.value);
-	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
-}
-
-spacing.oninput = function() {
-    spacingValue.innerHTML = this.value;
-    neoCity.spacing = parseInt(this.value);
-	citySize.innerHTML =(Math.floor(Math.sqrt(neoCity.maxNumOfSteps)))
-}

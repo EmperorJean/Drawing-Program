@@ -56,8 +56,8 @@ neoCity.drawBuilding = function(width, height, spacing) {
 	j++;
 	
 	height = Math.floor(Math.random() * neoCity.maxHeight + 10);
-	let geometry = new BoxGeometry(width, height, width)
-	let object = new Mesh(geometry, new MeshBasicMaterial({ color: Math.random() * 0xffffff }));
+	let geometry = new THREE.BoxGeometry(width, height, width)
+	let object = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff }));
 	object.position.x = (width + spacing) * i
 	object.position.z = (width + spacing) * j
 	object.position.y = height/2
@@ -81,20 +81,20 @@ neoCity.start = function () {
 	camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
 	controls.target.set(0, neoCity.maxHeight + 50, 0);
 		controls.update();
-	const geometry = new BufferGeometry();
+	const geometry = new THREE.BufferGeometry();
 	const vertices = [];
 
 	for ( let i = 0; i < 10000; i ++ ) {
 
-		vertices.push( MathUtils.randFloatSpread( 2000 ) ); // x
-		vertices.push( MathUtils.randFloatSpread( 2000 ) ); // y
-		vertices.push( MathUtils.randFloatSpread( 2000 ) ); // z
+		vertices.push( THREE.MathUtils.randFloatSpread( 2000 ) ); // x
+		vertices.push( THREE.MathUtils.randFloatSpread( 2000 ) ); // y
+		vertices.push( THREE.MathUtils.randFloatSpread( 2000 ) ); // z
 
 	}
 
-	geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
+	geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
 
-	const particles = new Points( geometry, new PointsMaterial( { color: 0x888888 } ) );
+	const particles = new THREE.Points( geometry, new THREE.PointsMaterial( { color: 0x888888 } ) );
 	scene.add( particles );
 	neoCity.loop =  setInterval(neoCity.drawOneStep, neoCity.speed)
 }

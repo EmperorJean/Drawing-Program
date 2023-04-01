@@ -1,27 +1,28 @@
-// Algorithms set up
-var algShortName = ["algGP", "algVines", "algDots"];
-var algNames = ["Geometric Patterns", "Vines", "Dots (Simple Example)"];
-var algCredits = ["Geometric Patterns by Michael Wehar", "Vines by Alyssa Zhang", "Modify This Algorithm!"];
-var algorithms = [algGP, algVines, algDots, neoCity];
-var algorithmsPaused = [];
-for (let i = 0; i < algorithms.length; i++) {
-    algorithms[i].initialize();
-    algorithmsPaused.push(true);
+// algorithms3D 2D set up
+var algShortName3D = ["neoCity"];
+var algNames3D = ["Neo City"];
+var algCredits3D = ["NeoCity By Jean Gerard"];
+
+var algorithms3D = [neoCity];
+var algorithmsPaused3D = [];
+for (let i = 0; i < algorithms3D.length; i++) {
+    algorithms3D[i].initialize();
+    algorithmsPaused3D.push(true);
 }
 
 // Algorithm selection set up
-var currentSelection = 1;
+var currentSelection3D = 1;
 
 // parameter set up
-let all_params = param_initialize();
-let params_store = create_params_store();
-param_display(all_params[currentSelection - 1]);
+let all_params3D = param_initialize3D();
+let params_store3D = create_params_store3D();
+param_display3D(all_params3D[currentSelection3D - 1]);
 
-function selectAlgorithm(id) {
+function selectAlgorithm3D(id) {
   $('#' + id).css({"border-color": "#86b7fe", "box-shadow": "0 0 0 .25rem rgba(13, 110, 253, .25)"});
 }
 
-function deselectAlgorithm(id) {
+function deselectAlgorithm3D(id) {
   $('#' + id).css({
       "border-color": "none",
       "box-shadow": "none"
@@ -29,19 +30,19 @@ function deselectAlgorithm(id) {
 }
 
 // Functions for user interaction
-function changeSelectionModified(id) {
+function changeSelectionModified3D(id) {
     // reset the prev algo
-    param_not_display(all_params[currentSelection - 1]);
-    deselectAlgorithm(currentSelection);
+    param_not_display3D(all_params[currentSelection3D - 1]);
+    deselectAlgorithm3D(currentSelection3D);
 
     // assign the new algo
-    currentSelection = id;
-    selectAlgorithm(currentSelection);
-    param_display(all_params[currentSelection - 1]);
-    algoNameUpdate(currentSelection);
+    currentSelection3D = id;
+    selectAlgorithm3D(currentSelection3D);
+    param_display3D(all_params3D[currentSelection3D - 1]);
+    algoNameUpdate3D(currentSelection3D);
 
     // button display
-    if (algorithmsPaused[currentSelection - 1]) {
+    if (algorithmsPaused3D[currentSelection3D - 1]) {
         document.getElementById("startButton").style.display = "initial";
         document.getElementById("pauseButton").style.display = "none";
         const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
@@ -55,61 +56,61 @@ function changeSelectionModified(id) {
 }
 
 // Create cards function
-function createCard(algId) {
-    let code = '<div class="card" title="' + algCredits[algId - 1] + '" onclick="changeSelectionModified(' + algId + ')" id="' + algId + '">\
-                    <div class="card-background" style="background-image: url(\'thumbnails/' + algShortName[algId - 1] + '.png\');"></div>\
+function createCard3D(algId) {
+    let code = '<div class="card" title="' + algCredits3D[algId - 1] + '" onclick="changeSelectionModified(' + algId + ')" id="' + algId + '">\
+                    <div class="card-background" style="background-image: url(\'thumbnails/' + algShortName3D[algId - 1] + '.png\');"></div>\
                     <div class="card-body">\
-                        <h5 class="card-text">' + algNames[algId - 1] + '</h5>\
+                        <h5 class="card-text">' + algNames3D[algId - 1] + '</h5>\
                     </div>\
                 </div>';
     document.getElementById("alg-cards").innerHTML += code;
 }
 // Initialize cards
-for(let i = 1; i <= algNames.length; i++) {
-    createCard(i);
+for(let i = 1; i <= algNames3D.length; i++) {
+    createCard3D(i);
 }
 // Fill in alg name
-algoNameUpdate(currentSelection);
-selectAlgorithm(currentSelection);
+algoNameUpdate3D(currentSelection3D);
+selectAlgorithm3D(currentSelection3D);
 
 // start or pause selected algorithm
-function start() {
-    if (algorithmsPaused[currentSelection - 1]) {
-        algorithms[currentSelection - 1].start();
+function start3D() {
+    if (algorithmsPaused3D[currentSelection3D - 1]) {
+        algorithms3D[currentSelection3D - 1].start();
         document.getElementById("startButton").style.display = "none";
         document.getElementById("pauseButton").style.display = "initial";
         const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
         tooltip.setContent({'.tooltip-inner': 'Pause'});
-        console.log("Started " + currentSelection);
+        console.log("Started " + currentSelection3D);
     } else {
-        algorithms[currentSelection - 1].pause();
+        algorithms3D[currentSelection3D - 1].pause();
         document.getElementById("startButton").style.display = "initial";
         document.getElementById("pauseButton").style.display = "none";
         const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
         tooltip.setContent({'.tooltip-inner': 'Start'});
-        console.log("Paused " + currentSelection);
+        console.log("Paused " + currentSelection3D);
     }
-    algorithmsPaused[currentSelection - 1] = !algorithmsPaused[currentSelection - 1];
+    algorithmsPaused3D[currentSelection3D - 1] = !algorithmsPaused3D[currentSelection3D - 1];
 }
 
 // reset selected algorithm
 function reset() {
-    algorithms[currentSelection - 1].reset();
+    algorithms3D[currentSelection3D - 1].reset();
     document.getElementById("startButton").style.display = "initial";
     document.getElementById("pauseButton").style.display = "none";
     const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
     tooltip.setContent({'.tooltip-inner': 'Start'});
-    algorithmsPaused[currentSelection - 1] = true;
-    console.log("Reset " + currentSelection);
+    algorithmsPaused3D[currentSelection3D - 1] = true;
+    console.log("Reset " + currentSelection3D);
 }
 
 // Clear canvas
-function clearCanvas() {
+function clearCanvas3D() {
     ctx.clearRect(0, 0, width, height);
 }
 
 // Save canvas as jpg
-function saveCanvas() {
+function saveCanvas3D() {
     var link = document.getElementById('link');
     link.setAttribute('download', 'artwork.jpg');
     link.setAttribute('href', c.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"));
@@ -131,10 +132,10 @@ offcanvas_start.addEventListener('change', function () {
 });
 
 // parameter set up
-function create_params_store() {
+function create_params_store3D() {
     let store = [];
-    for (let id in algorithms) {
-        let algo = algorithms[id];
+    for (let id in algorithms3D) {
+        let algo = algorithms3D[id];
         let algo_copy = {};
         for (let param in algo) {
             if (typeof algo[param] === "boolean" || typeof algo[param] === "number" || typeof algo[param] === "string") {
@@ -146,10 +147,10 @@ function create_params_store() {
     return store;
 }
 
-function param_initialize() {
+function param_initialize3D() {
     let all_params = [];
-    for (let id in algorithms) {
-        let algo = algorithms[id];
+    for (let id in algorithms3D) {
+        let algo = algorithms3D[id];
         let curr_params = [];
         let keys = Object.keys(algo).sort();
         for (let index in keys) {
@@ -204,12 +205,12 @@ function param_initialize() {
     return all_params;
 }
 
-function set_to_default() {
-    let id = currentSelection - 1;
-    let algo = params_store[id];
+function set_to_default3D() {
+    let id = currentSelection3D - 1;
+    let algo = params_store3D[id];
     for(let param in algo) {
         let param_id = id + "__" + param;
-        if(algo[param] != algorithms[id][param]) {
+        if(algo[param] != algorithms3D[id][param]) {
             console.log("*** Changed ***");
             if(typeof algo[param] === "boolean") {
                 $("#" + param_id).prop('checked', algo[param]);
@@ -220,9 +221,9 @@ function set_to_default() {
     }
 }
 
-function save_params() {
-  let curParams = create_params_store();
-  let textData = JSON.stringify(curParams[currentSelection - 1]);
+function save_params3D() {
+  let curParams = create_params_store3D();
+  let textData = JSON.stringify(curParams[currentSelection3D - 1]);
   var link = document.getElementById('linkParams');
   link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textData));
   link.setAttribute('download', 'params.js');
@@ -230,30 +231,30 @@ function save_params() {
 }
 
 // display params of the current algo
-function param_display(curr_params) {
+function param_display3D(curr_params) {
     for (let i in curr_params) {
         // console.log((curr_params[i]));
-        let temp = currentSelection - 1;
+        let temp = currentSelection3D - 1;
         $('.' + temp + '__' + curr_params[i] + '_wrapper').css("display", "flex");
     }
 }
 
 // hide the params of the previous algo
-function param_not_display(curr_params) {
+function param_not_display3D(curr_params) {
     for (let i in curr_params) {
         // console.log((curr_params[i]));
-        let temp = currentSelection - 1;
+        let temp = currentSelection3D - 1;
         $('.' + temp + '__' + curr_params[i] + '_wrapper').css("display", "none");
     }
 }
 
 // parameter panel subtitle update
-function algoNameUpdate(currentSelection) {
-    $('.current_algo').text(algNames[currentSelection - 1]);
+function algoNameUpdate3D(currentSelection3D) {
+    $('.current_algo').text(algNames[currentSelection3D - 1]);
 }
 
 // update offcanvas content
-function transformPanel(curr) {
+function transformPanel3D(curr) {
     if (curr.matches) { // If media query matches
         console.log("match");
         // change tab properties
@@ -348,34 +349,34 @@ $(document).ready(function () {
 
 // parameter change detection
 $('.inner_param .form-control').change(function () {
-    let id = currentSelection - 1;
+    let id = currentSelection3D - 1;
     let param = $(this).attr("id").split("__")[1];
-    console.log(typeof algorithms[id][param] + ", " + param);
-    console.log("before", algorithms[id][param]);
-    if(typeof algorithms[id][param] === "number") {
-        algorithms[id][param] = JSON.parse($(this).val());
+    console.log(typeof algorithms3D[id][param] + ", " + param);
+    console.log("before", algorithms3D[id][param]);
+    if(typeof algorithms3D[id][param] === "number") {
+        algorithms3D[id][param] = JSON.parse($(this).val());
     } else {
-      algorithms[id][param] = $(this).val();
+      algorithms3D[id][param] = $(this).val();
     }
     $(this).attr("title", $(this).val());
     $(this).attr("placeholder", $(this).val());
     $(this).val("");
-    console.log("after", algorithms[id][param]);
+    console.log("after", algorithms3D[id][param]);
 });
 
 $('.inner_param .form-check-input').change(function () {
-    let id = currentSelection - 1;
+    let id = currentSelection3D - 1;
     let param = $(this).attr("id").split("__")[1];
-    console.log(typeof algorithms[id][param] + ", " + param);
-    console.log("before", algorithms[id][param]);
+    console.log(typeof algorithms3D[id][param] + ", " + param);
+    console.log("before", algorithms3D[id][param]);
     if (!$(this).is(':checked')) {
-        algorithms[id][param] = false;
+        algorithms3D[id][param] = false;
         $(this).removeClass('checked');
         $(this).val("false");
     } else {
-        algorithms[id][param] = true;
+        algorithms3D[id][param] = true;
         $(this).addClass('checked');
         $(this).val("true");
     }
-    console.log("after", algorithms[id][param]);
+    console.log("after", algorithms3D[id][param]);
 });

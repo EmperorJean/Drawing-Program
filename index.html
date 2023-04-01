@@ -308,7 +308,7 @@
 
         // Canvas
         var c = document.getElementById("myCanvas");
-        var ctx = ""
+        var ctx = c.getContext("2d")
         // Dimensions
         var width = c.width;
         var height = c.height;
@@ -318,7 +318,7 @@
 		
 		scene = new THREE.Scene();
 
-        renderer = new THREE.WebGLRenderer({canvas: myCanvas, antialias: true, preserveDrawingBuffer: true  });
+        renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true  });
 
         const controls = new OrbitControls(camera, renderer.domElement);
 	

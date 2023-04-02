@@ -119,6 +119,9 @@
                 <canvas id="myCanvas" class="canvas" width="600" height="600">Your browser does not support the HTML5 canvas
                     tag.
                 </canvas>
+                <canvas id="myCanvas3D" class="canvas" width="600" height="600">Your browser does not support the HTML5 canvas
+                    tag.
+                </canvas>
             </div>
         </div>
 
@@ -137,12 +140,29 @@
                                      style="color: forestgreen">
                                     <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
                                 </svg>
-                                &nbsp;Algorithm Lists
+                                &nbsp;2D Algorithm Lists
                             </strong>
                             <!-- List of Algorithms -->
                             <div id="alg-cards" class="flex_container"></div>
                         </div>
                     </div>
+                     <!-- Algo 3DPanel -->
+                     <div class="tab-pane fade show" id="v-pills-algo3D" role="tabpanel"
+                     aria-labelledby="v-pills-algo3D-tab" tabindex="0">
+                    <div class="algo3D_panel">
+                        <!-- Panel Title -->
+                        <strong class="d-flex w-100 align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-code-slash"
+                                 viewBox="0 0 16 16"
+                                 style="color: forestgreen">
+                                <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/>
+                            </svg>
+                            &nbsp;3D Algorithm Lists
+                        </strong>
+                        <!-- List of Algorithms -->
+                        <div id="alg3D-cards" class="flex_container"></div>
+                    </div>
+                </div>
                     <!-- Parameter Panel -->
                     <div class="tab-pane fade" id="v-pills-params" role="tabpanel" aria-labelledby="v-pills-params-tab"
                          tabindex="0">
@@ -273,7 +293,11 @@
                      style="justify-content: center">
                     <button class="nav-link active" id="v-pills-algo-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-algo" type="button" role="tab" aria-controls="v-pills-algo"
-                            aria-selected="true">Algos
+                            aria-selected="true" onclick="setCanvas(false)">Algos2D
+                    </button>
+                    <button class="nav-link" id="v-pills-algo3D-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-algo3D" type="button" role="tab" aria-controls="v-pills-algo3D"
+                            aria-selected="false" onclick="setCanvas(true)">Algos3D
                     </button>
                     <button class="nav-link" id="v-pills-params-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-params" type="button" role="tab" aria-controls="v-pills-params"
@@ -308,6 +332,7 @@
 
         // Canvas
         var c = document.getElementById("myCanvas");
+        var c3D = document.getElementById("myCanvas3D");
         var ctx = c.getContext("2d")
         // Dimensions
         var width = c.width;
@@ -318,7 +343,7 @@
 		
 		scene = new THREE.Scene();
 
-        renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true  });
+        renderer = new THREE.WebGLRenderer({canvas: myCanvas3D, antialias: true, preserveDrawingBuffer: true  });
 
         const controls = new OrbitControls(camera, renderer.domElement);
 	
@@ -333,5 +358,6 @@
 	<script src="neoCity.js"></script>
 	<script src="neoCity_Params.js"></script>
     <script src="index.js"></script>
+    <script src="index3D.js"></script>
 </body>
 </html>

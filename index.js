@@ -1,26 +1,67 @@
+// Canvas
+
+const myCanvas2D = document.getElementById("myCanvas");
+const myCanvas3D = document.getElementById("myCanvas3D");
+var canvas3D = false
+myCanvas3D.style.display = 'none';
+
+
 // Algorithms set up
 var algShortName = ["algGP", "algVines", "algDots"];
 var algNames = ["Geometric Patterns", "Vines", "Dots (Simple Example)"];
 var algCredits = ["Geometric Patterns by Michael Wehar", "Vines by Alyssa Zhang", "Modify This Algorithm!"];
-var algorithms = [algGP, algVines, algDots, neoCity];
+var algorithms = [algGP, algVines, algDots];
 var algorithmsPaused = [];
+var lastSelected, lastSelected3D;
+
 for (let i = 0; i < algorithms.length; i++) {
     algorithms[i].initialize();
     algorithmsPaused.push(true);
 }
 
+// algorithms3D  set up
+var algShortName3D = ["neoCity"];
+var algNames3D = ["Neo City"];
+var algCredits3D = ["NeoCity By Jean Gerard"];
+var algorithms3D = [neoCity];
+var algorithmsPaused3D = [];
+
+for (let i = 0; i < algorithms3D.length; i++) {
+    algorithms3D[i].initialize();
+    algorithmsPaused3D.push(true);
+}
+
+
 // Algorithm selection set up
 var currentSelection = 1;
+var currentSelection3D = 1;
 
 // parameter set up
 let all_params = param_initialize();
 let params_store = create_params_store();
+
 param_display(all_params[currentSelection - 1]);
 
 function selectAlgorithm(id) {
   $('#' + id).css({"border-color": "#86b7fe", "box-shadow": "0 0 0 .25rem rgba(13, 110, 253, .25)"});
 }
 
+function setCanvas(boo)
+{
+    
+    canvas3D = boo;
+    
+    if(boo)
+    {
+        changeSelectionModified3D(currentSelection3D);
+        myCanvas2D.style.display= 'none';
+        myCanvas3D.style.display = 'block';
+    }else{
+        changeSelectionModified(currentSelection);
+        myCanvas2D.style.display= 'block';
+        myCanvas3D.style.display = 'none';
+    }
+}
 function deselectAlgorithm(id) {
   $('#' + id).css({
       "border-color": "none",
@@ -31,6 +72,7 @@ function deselectAlgorithm(id) {
 // Functions for user interaction
 function changeSelectionModified(id) {
     // reset the prev algo
+    param_not_display3D(all_params[all_params.length -1  + currentSelection3D - 1]);
     param_not_display(all_params[currentSelection - 1]);
     deselectAlgorithm(currentSelection);
 
@@ -68,12 +110,33 @@ function createCard(algId) {
 for(let i = 1; i <= algNames.length; i++) {
     createCard(i);
 }
+
 // Fill in alg name
 algoNameUpdate(currentSelection);
 selectAlgorithm(currentSelection);
 
 // start or pause selected algorithm
 function start() {
+
+    if(canvas3D)
+    {
+        if (algorithmsPaused3D[currentSelection3D - 1]) {
+            algorithms3D[currentSelection3D - 1].start();
+            document.getElementById("startButton").style.display = "none";
+            document.getElementById("pauseButton").style.display = "initial";
+            const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
+            tooltip.setContent({'.tooltip-inner': 'Pause'});
+            console.log("Started " + currentSelection3D);
+        } else {
+            algorithms3D[currentSelection3D - 1].pause();
+            document.getElementById("startButton").style.display = "initial";
+            document.getElementById("pauseButton").style.display = "none";
+            const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
+            tooltip.setContent({'.tooltip-inner': 'Start'});
+            console.log("Paused " + currentSelection3D);
+        }
+        algorithmsPaused3D[currentSelection3D - 1] = !algorithmsPaused3D[currentSelection3D - 1];
+    }else{
     if (algorithmsPaused[currentSelection - 1]) {
         algorithms[currentSelection - 1].start();
         document.getElementById("startButton").style.display = "none";
@@ -91,28 +154,68 @@ function start() {
     }
     algorithmsPaused[currentSelection - 1] = !algorithmsPaused[currentSelection - 1];
 }
+}
 
 // reset selected algorithm
 function reset() {
-    algorithms[currentSelection - 1].reset();
+
+    
     document.getElementById("startButton").style.display = "initial";
     document.getElementById("pauseButton").style.display = "none";
     const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");
     tooltip.setContent({'.tooltip-inner': 'Start'});
+
+    if(canvas3D)
+    {
+    algorithms3D[currentSelection3D - 1].reset();
+    algorithmsPaused3D[currentSelection3D - 1] = true;
+    console.log("Reset " + currentSelection3D);
+    }else{
+    algorithms[currentSelection - 1].reset();
     algorithmsPaused[currentSelection - 1] = true;
     console.log("Reset " + currentSelection);
+    }
 }
 
 // Clear canvas
 function clearCanvas() {
+    if(canvas3D)
+    {
+        while (scene.children.length > 0) {
+            const child = scene.children[0];
+            scene.remove(child);
+
+            // Dispose of any materials, geometries, or textures associated with the child object
+            if (child.geometry) {
+                child.geometry.dispose();
+            }
+            if (child.material) {
+                child.material.dispose();
+            }
+            if (child.texture) {
+                child.texture.dispose();
+            }
+        }
+        
+        
+		algorithms3D[currentSelection3D - 1].initialize();
+        reset();
+    }else{
     ctx.clearRect(0, 0, width, height);
+    }
 }
 
 // Save canvas as jpg
 function saveCanvas() {
     var link = document.getElementById('link');
-    link.setAttribute('download', 'artwork.jpg');
-    link.setAttribute('href', c.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"));
+    if(canvas3D)
+    {
+        link.setAttribute('download', 'artwork3D.png');
+        link.setAttribute('href', c3D.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+    }else{
+        link.setAttribute('download', 'artwork.jpg');
+        link.setAttribute('href', c.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"));
+    }
     link.click();
     // var canvas_jpg = c.toDataURL("canvas/jpg").replace("image/jpg", "image/octet-stream");
     // window.location.href = canvas_jpg;
@@ -205,6 +308,22 @@ function param_initialize() {
 }
 
 function set_to_default() {
+    if(canvas3D)
+    {
+        let id = currentSelection3D - 1;
+        let algo = params_store3D[id];
+        for(let param in algo) {
+            let param_id = id + "__" + param;
+            if(algo[param] != algorithms3D[id][param]) {
+                console.log("*** Changed ***");
+                if(typeof algo[param] === "boolean") {
+                    $("#" + param_id).prop('checked', algo[param]);
+                }
+                $("#" + param_id).val(algo[param]);
+                $("#" + param_id).trigger("change");
+            }
+        }
+    }else{
     let id = currentSelection - 1;
     let algo = params_store[id];
     for(let param in algo) {
@@ -219,13 +338,24 @@ function set_to_default() {
         }
     }
 }
+}
 
 function save_params() {
-  let curParams = create_params_store();
-  let textData = JSON.stringify(curParams[currentSelection - 1]);
-  var link = document.getElementById('linkParams');
+    let curParams;
+    let textData;
+    var link = document.getElementById('linkParams');
+  if(canvas3D)
+  {
+   curParams = create_params_store3D();
+   textData = JSON.stringify(curParams[currentSelection3D - 1]);
+   link.setAttribute('download', 'params3D.js');
+  }else{
+    curParams = create_params_store();
+    textData = JSON.stringify(curParams[currentSelection - 1]);
+    link.setAttribute('download', 'params.js');
+  }
+  
   link.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textData));
-  link.setAttribute('download', 'params.js');
   link.click();
 }
 
@@ -249,7 +379,13 @@ function param_not_display(curr_params) {
 
 // parameter panel subtitle update
 function algoNameUpdate(currentSelection) {
-    $('.current_algo').text(algNames[currentSelection - 1]);
+    console.log("Is3D: " + canvas3D)
+    if(canvas3D)
+    {
+        $('.current_algo').text(algNames3D[currentSelection3D - 1]);
+    }else{
+        $('.current_algo').text(algNames[currentSelection - 1]);
+    }
 }
 
 // update offcanvas content
@@ -261,6 +397,8 @@ function transformPanel(curr) {
             .attr("aria-controls", "offcanvasRight").attr("data-bs-target", "#offcanvasRight");
         $('#v-pills-params-tab').attr("data-bs-toggle", "offcanvas")
             .attr("aria-controls", "offcanvasRight").attr("data-bs-target", "#offcanvasRight");
+        $('#v-pills-algo3D-tab').attr("data-bs-toggle", "offcanvas")
+            .attr("aria-controls", "offcanvasRight").attr("data-bs-target", "#offcanvasRight");    
         $('#v-pills-action-tab').attr("data-bs-toggle", "offcanvas")
             .attr("aria-controls", "offcanvasRight").attr("data-bs-target", "#offcanvasRight");
         $('#v-pills-about-tab').attr("data-bs-toggle", "offcanvas")
@@ -271,6 +409,9 @@ function transformPanel(curr) {
         if ($('#v-pills-algo-tab').attr("class") === "nav-link active") {
             $('#v-pills-algo-tab').attr("class", "nav-link");
             lastPanel = "#v-pills-algo-tab";
+        }else if ($('#v-pills-algo3D-tab').attr("class") === "nav-link active") {
+            $('#v-pills-algo3D-tab').attr("class", "nav-link");
+            lastPanel = "#v-pills-algo3D-tab";
         } else if ($('#v-pills-params-tab').attr("class") === "nav-link active") {
             $('#v-pills-params-tab').attr("class", "nav-link");
             lastPanel = "#v-pills-params-tab";
@@ -294,6 +435,8 @@ function transformPanel(curr) {
             if (prev_panel !== "") {
                 if (prev_panel === "v-pills-algo-tab") {
                     $('.algo_panel').hide();
+                }else if (prev_panel === "v-pills-algo3D-tab") {
+                    $('.algo3D_panel').hide();
                 } else if (prev_panel === "v-pills-params-tab") {
                     $('.param_panel').hide();
                 } else if (prev_panel === "v-pills-action-tab") {
@@ -305,6 +448,8 @@ function transformPanel(curr) {
 
             if (this.id === "v-pills-algo-tab") {
                 $('.algo_panel').show();
+            }else if (this.id === "v-pills-algo3D-tab") {
+                $('.algo3D_panel').show();
             } else if (this.id === "v-pills-params-tab") {
                 $('.param_panel').show();
             } else if (this.id === "v-pills-action-tab") {
@@ -320,6 +465,8 @@ function transformPanel(curr) {
         // change back tab properties
         $('#v-pills-algo-tab').attr("data-bs-toggle", "pill")
             .attr("aria-controls", "v-pills-algo").attr("data-bs-target", "#v-pills-algo");
+        $('#v-pills-algo3D-tab').attr("data-bs-toggle", "pill")
+            .attr("aria-controls", "v-pills-algo3D").attr("data-bs-target", "#v-pills-algo3D");
         $('#v-pills-params-tab').attr("data-bs-toggle", "pill")
             .attr("aria-controls", "v-pills-params").attr("data-bs-target", "#v-pills-params");
         $('#v-pills-action-tab').attr("data-bs-toggle", "pill")
@@ -348,6 +495,7 @@ $(document).ready(function () {
 
 // parameter change detection
 $('.inner_param .form-control').change(function () {
+    if(canvas3D) return;
     let id = currentSelection - 1;
     let param = $(this).attr("id").split("__")[1];
     console.log(typeof algorithms[id][param] + ", " + param);
@@ -364,6 +512,7 @@ $('.inner_param .form-control').change(function () {
 });
 
 $('.inner_param .form-check-input').change(function () {
+    if(canvas3D)return;
     let id = currentSelection - 1;
     let param = $(this).attr("id").split("__")[1];
     console.log(typeof algorithms[id][param] + ", " + param);

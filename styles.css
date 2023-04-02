@@ -190,7 +190,7 @@
     margin-right: 5px;
 }
 
-.algo_panel .flex_container {
+.algo_panel .flex_container, .algo3D_panel .flex_container {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
@@ -205,7 +205,7 @@
     background-position: 50% 50%;
 }
 
-.algo_panel .card {
+.algo_panel .card, .algo3D_panel .card {
     border: 0;
     width: 180px;
     height: 130px;
@@ -215,25 +215,25 @@
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.algo_panel .card-body {
+.algo_panel .card-body, .algo_panel3D .card-body {
     padding: 10px 12px;
 }
 
-.algo_panel .card:hover {
+.algo_panel .card:hover, .algo3D_panel .card:hover {
     cursor: pointer;
     background-color: var(--hover_color);
 }
 
-.algo_panel .card:active {
+.algo_panel .card:active, .algo3D_panel .card:active {
     cursor: pointer;
     background-color: var(--active_color);
 }
 
-.algo_panel h5 {
+.algo_panel h5, .algo3D_panel h5 {
     font-size: 0.9rem;
 }
 
-.algo_panel .card-title {
+.algo_panel .card-title, .algo3D_panel .card-title {
     margin: 0;
 }
 

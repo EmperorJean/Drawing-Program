@@ -2,12 +2,12 @@ var conway = {};
 var world;
 
 conway.genCube = function (x, y, z) {
-	let geometry = new BoxGeometry(1, 1, 1);
-	let cube = new Mesh(geometry, new MeshBasicMaterial({ color: new Color(0x006ee6), transparent: true }));
-	cube.material.opacity = 0.5;
+	let geometry = new THREE.BoxGeometry(1, 1, 1);
+	let cube = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: new THREE.Color(0x006ee6), transparent: true }));
+	cube.material.opacity = 0.25;
 	// set position
 	cube.position.x = x;
-	cube.position.y = 200 + y;
+	cube.position.y = y;
 	cube.position.z = z;
 	// make the cube not visible by default
 	cube.visible = false;

@@ -20,10 +20,10 @@ for (let i = 0; i < algorithms.length; i++) {
 }
 
 // algorithms3D  set up
-var algShortName3D = ["neoCity", "conway"];
-var algNames3D = ["Neo City", "Conway Game of Life"];
-var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen"];
-var algorithms3D = [neoCity, conway];
+var algShortName3D = ["neoCity", "conway", "print10"];
+var algNames3D = ["Neo City", "Conway Game of Life", "10 print"];
+var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "10 print by Jean Gerard"];
+var algorithms3D = [neoCity, conway, print10];
 var algorithmsPaused3D = [];
 
 for (let i = 0; i < algorithms3D.length; i++) {

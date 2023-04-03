@@ -89,14 +89,14 @@ conway.reset = function () {
 }
 
 conway.initialize = function () {
-	conway.reset();
-	world[0][0][0].isAlive = true;
-	world[0][1][0].isAlive = true;
-	world[0][1][1].isAlive = true;
-	world[1][1][1].isAlive = true;
-	world[1][1][0].isAlive = true;
-	world[2][1][1].isAlive = true;
-	world[1][1][2].isAlive = true;
+	// conway.reset();
+	// world[0][0][0].isAlive = true;
+	// world[0][1][0].isAlive = true;
+	// world[0][1][1].isAlive = true;
+	// world[1][1][1].isAlive = true;
+	// world[1][1][0].isAlive = true;
+	// world[2][1][1].isAlive = true;
+	// world[1][1][2].isAlive = true;
 
 }
 

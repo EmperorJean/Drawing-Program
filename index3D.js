@@ -17,16 +17,15 @@ function deselectAlgorithm3D(id) {
 // Functions for user interaction
 function changeSelectionModified3D(id) {
     // reset the prev algo
-    param_not_display3D(all_params[all_params.length -1  + currentSelection3D - 1]);
+    param_not_display3D(all_params[all_params.length -1  + currentSelection3D- algorithms3D.length]);
     param_not_display(all_params[currentSelection - 1]);
 
     deselectAlgorithm3D(currentSelection3D);
     // assign the new algo
     currentSelection3D = id;
     selectAlgorithm3D(currentSelection3D);
-    param_display3D(all_params3D[all_params.length -1 + currentSelection3D - 1]);
+    param_display3D(all_params[all_params.length -1  + currentSelection3D- algorithms3D.length]);
     algoNameUpdate(currentSelection3D);
-
     // button display
     if (algorithmsPaused3D[currentSelection3D - 1]) {
         document.getElementById("startButton").style.display = "initial";
@@ -81,7 +80,7 @@ function param_initialize3D() {
         let keys = Object.keys(algo).sort();
         for (let index in keys) {
             let param = keys[index];
-            let param_id = id + "__" + param;
+            let param_id = id + "__3D" + param;
             if (typeof algo[param] === "number") {
                 let num_elem =
                     "<div class='" + param_id + "_wrapper' style='display: none'>" +
@@ -128,7 +127,6 @@ function param_initialize3D() {
         }
         all_params.push(curr_params);
     }
-    console.log(all_params)
     return all_params;
 }
 
@@ -138,7 +136,7 @@ function param_display3D(curr_params) {
     for (let i in curr_params) {
         // console.log((curr_params[i]));
         let temp = currentSelection3D - 1;
-        $('.' + temp + '__' + curr_params[i] + '_wrapper').css("display", "flex");
+        $('.' + temp + '__3D' + curr_params[i] + '_wrapper').css("display", "flex");
     }
 }
 
@@ -147,7 +145,7 @@ function param_not_display3D(curr_params) {
     for (let i in curr_params) {
         // console.log((curr_params[i]));
         let temp = currentSelection3D - 1;
-        $('.' + temp + '__' + curr_params[i] + '_wrapper').css("display", "none");
+        $('.' + temp + '__3D' + curr_params[i] + '_wrapper').css("display", "none");
     }
 }
 

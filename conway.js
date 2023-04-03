@@ -66,9 +66,8 @@ conway.drawOneStep = function () {
 	conway.numOfSteps++;
 }
 
-conway.reset = function () {
-	conway.pause();
-	// gen x-dim
+conway.resetWorld = function()
+{
 	world = new Array(conway.worldSize);
 	// fill x-dim
 	for (let x = 0; x < conway.worldSize; x++) {
@@ -85,18 +84,16 @@ conway.reset = function () {
 			}
 		}
 	}
+}
+
+conway.reset = function () {
+	conway.pause();
+	// gen x-dim
 	conway.numOfSteps = 0;
 }
 
 conway.initialize = function () {
-	// conway.reset();
-	// world[0][0][0].isAlive = true;
-	// world[0][1][0].isAlive = true;
-	// world[0][1][1].isAlive = true;
-	// world[1][1][1].isAlive = true;
-	// world[1][1][0].isAlive = true;
-	// world[2][1][1].isAlive = true;
-	// world[1][1][2].isAlive = true;
+	conway.reset();
 
 }
 
@@ -107,5 +104,15 @@ conway.pause = function () {
 }
 
 conway.start = function () {
+	conway.resetWorld();
+	
+	world[0][0][0].isAlive = true;
+	world[0][1][0].isAlive = true;
+	world[0][1][1].isAlive = true;
+	world[1][1][1].isAlive = true;
+	world[1][1][0].isAlive = true;
+	world[2][1][1].isAlive = true;
+	world[1][1][2].isAlive = true;
+	
 	conway.loop = setInterval(conway.drawOneStep, conway.speed);
 }

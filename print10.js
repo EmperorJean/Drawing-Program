@@ -1,11 +1,7 @@
 var print10 = {};
 let is3D = false;
 
-let line;
-let t = 0, r = 600;
-const positions = [];
-const colors = [];	
-this.i, this.j;
+
 
 print10.initialize = function  () {
 	this.i = 0;
@@ -39,10 +35,14 @@ print10.pause = function () {
 }
 
 print10.start = function () {
-
+	let line;
+	let t = 0, r = 600;
+	const positions = [];
+	const colors = [];	
+	this.i, this.j;
 	const geometry = new THREE.BufferGeometry();
 	const material = new THREE.LineBasicMaterial({ vertexColors: true });
-	camera.position.set(100, 100, 1000);
+	camera.position.set(0, 0, 1000);
 
 for (let i = 0; i < print10.maxNumOfSteps; i++) {
 
@@ -56,14 +56,14 @@ for (let i = 0; i < print10.maxNumOfSteps; i++) {
 
     // colors
 
-    colors.push((x / r) + 0.5);
-    colors.push((y / r) + 0.5);
-    colors.push((z / r) + 0.5);
+    colors.push((0) + 0.5);
+    colors.push((0) + 0.5);
+    colors.push((0) + 0.5);
 
 }
 
 geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-
+geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
 line = new THREE.Line(geometry, material);
 scene.add(line);
 	//print10.loop =  setInterval(print10.drawOneStep, print10.speed)
@@ -82,15 +82,6 @@ function render() {
 	let time = performance.now() * 0.001;
 	time += 10000;	
 	renderer.render(scene, camera);
-	let spd = .5;
-
-
-	if(print10.scrolling)
-	{
-
-	camera.position.x += spd;
-	camera.position.z += spd
-	}
 	//stats.update();
 
 }

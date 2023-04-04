@@ -154,7 +154,7 @@ function param_not_display3D(curr_params) {
 $('.inner_param .form-control').change(function () {
     if(!canvas3D) return;
     let id = currentSelection3D - 1;
-    let param = $(this).attr("id").split("__")[1];
+    let param = $(this).attr("id").split("__3D")[1];
     console.log(typeof algorithms3D[id][param] + ", " + param);
     console.log("before", algorithms3D[id][param]);
     if(typeof algorithms3D[id][param] === "number") {
@@ -171,7 +171,7 @@ $('.inner_param .form-control').change(function () {
 $('.inner_param .form-check-input').change(function () {
     if(!canvas3D) return;
     let id = currentSelection3D - 1;
-    let param = $(this).attr("id").split("__")[1];
+    let param = $(this).attr("id").split("__3D")[1];
     console.log(typeof algorithms3D[id][param] + ", " + param);
     console.log("before", algorithms3D[id][param]);
     if (!$(this).is(':checked')) {

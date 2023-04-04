@@ -51,15 +51,27 @@ function setCanvas(boo)
     
     canvas3D = boo;
     
-    if(boo)
+    if(boo) // If we are switching to a 3D Canvas
     {
-        changeSelectionModified3D(currentSelection3D);
-        myCanvas2D.style.display= 'none';
-        myCanvas3D.style.display = 'block';
-    }else{
+
+        // pausing all the running algos
+        for(let i = 0; i < algorithms.length; i++)
+        {
+        algorithmsPaused[i] = true;
+        algorithms[i].pause();
+        }
+        changeSelectionModified3D(currentSelection3D); // This saves the last spot in each page
+        myCanvas2D.style.display= 'none'; // Setting 2D to no longer display
+        myCanvas3D.style.display = 'block'; // Setting 3D to display
+    }else{ // Switching back to the 2D canvas
+        for(let i = 0; i < algorithms3D.length; i++)
+        {
+        algorithmsPaused3D[i] = true;
+        algorithms3D[i].pause();
+        }
         changeSelectionModified(currentSelection);
-        myCanvas2D.style.display= 'block';
-        myCanvas3D.style.display = 'none';
+        myCanvas2D.style.display= 'block'; // Setting the 2D to display
+        myCanvas3D.style.display = 'none'; // Setting 3D to no longer display
     }
 }
 function deselectAlgorithm(id) {
@@ -83,7 +95,8 @@ function changeSelectionModified(id) {
     algoNameUpdate(currentSelection);
 
     // button display
-    if (algorithmsPaused[currentSelection - 1]) {
+    if (algorithmsPaused[currentSelection - 1] || algorithmsPaused3D[currentSelection3D - 1]) {
+        
         document.getElementById("startButton").style.display = "initial";
         document.getElementById("pauseButton").style.display = "none";
         const tooltip = bootstrap.Tooltip.getInstance("#start_pause_button");

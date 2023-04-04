@@ -70,14 +70,14 @@ scene.add(line);
 }
 
 
-function animate() {
+ print10.animate = function() {
 	animationStarted = true;
 	requestAnimationFrame(animate);
 	render();
 
 }
 
-function render() {
+print10.render = function () {
 
 	let time = performance.now() * 0.001;
 	time += 10000;	

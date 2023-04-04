@@ -11,11 +11,6 @@ neoCity.initialize = function  () {
 	// controls.target.set(0, neoCity.maxHeight + 50, 0);
 	// controls.update();
 	neoCity.reset();
-
-
-	if(!animationStarted){
-	animate()
-	}
 	// let s = Math.floor(Math.sqrt(neoCity.maxNumOfSteps)) * (neoCity.buildingSize + neoCity.spacing)
 	// const geometry = new BoxGeometry(s,neoCity.maxHeight,s );
 
@@ -78,6 +73,12 @@ neoCity.pause = function () {
 }
 
 neoCity.start = function () {
+
+
+
+	if(!animationStarted){
+		animate()
+		}
 	camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
 	controls.target.set(0, neoCity.maxHeight + 50, 0);
 		controls.update();

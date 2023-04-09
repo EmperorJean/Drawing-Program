@@ -1,21 +1,59 @@
 var conway = {};
-var world;
+var conway_mesh = null;
+var conway_list = null;
 
-conway.genCube = function (x, y, z) {
-	let geometry = new THREE.BoxGeometry(1, 1, 1);
-	let cube = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: new THREE.Color(0x006ee6), transparent: true }));
-	cube.material.opacity = 0.25;
-	// set position
-	cube.position.x = x;
-	cube.position.y = y;
-	cube.position.z = z;
-	// make the cube not visible by default
-	cube.visible = false;
-	scene.add(cube);
-	return cube;
+conway.drawCubes = function () {
+	var dummy = new THREE.Object3D();
+	for (let i = 0; i < conway_list.length; i++) {
+		if (conway_list[i].alive) {
+			dummy.position.set(i % conway.worldSize, (i / conway.worldSize) % conway.worldSize, i / Math.pow(conway.worldSize, 2));
+			dummy.updateMatrix();
+			conway_mesh.setMatrixAt(i, dummy.matrix);
+		}
+	}
 }
 
-conway.isAliveNextStep = function (x, y, z) {
+conway.drawOneStep = function () {
+	if(conway.numOfSteps > conway.maxNumOfSteps) {
+		clearInterval(conway.loop)
+		return false;
+	}
+
+	// materials
+	const geometry = new THREE.BoxGeometry(1,1,1);
+	const material = new THREE.MeshBasicMaterial({ color: new THREE.Color(0x006ee6), transparent: true , opacity: 0.15});
+
+	// dispose old mesh
+	if (conway_mesh != null) { 
+		conway_mesh.material.dispose();
+		conway_mesh.geometry.dispose();
+		scene.remove(conway_mesh);
+	 }
+
+	// create new mesh
+	conway_mesh = new THREE.InstancedMesh(geometry, material, Math.pow(conway.worldSize, 3));
+
+	// draw each cube
+	conway.drawCubes();
+
+	// calculate next step
+	for (let i = 0; i < conway_list.length; i++) {
+		let x = i % conway.worldSize
+		let y = (i / conway.worldSize) % conway.worldSize
+		let z = i / Math.pow(conway.worldSize, 2)
+		conway_list[i].aliveNext = conway.isAliveNextStep(x, ~~y, ~~z);
+	}
+
+	for (let i = 0; i < conway_list.length; i++) { conway_list[i].alive = conway_list[i].aliveNext; }
+
+	// final
+	scene.add(conway_mesh);
+	conway_mesh.instanceMatrix.needsUpdate = true;
+	conway.numOfSteps++;
+	
+}
+
+conway.isAliveNextStep = function(x,y,z) {
 	let neighbors = 0;
 	for (let i = x - 1; i <= x + 1; i++) {
 		// validate i
@@ -32,7 +70,7 @@ conway.isAliveNextStep = function (x, y, z) {
 				if (i == x && j == y && k == z) { continue; }
 
 				// check if neighbor is alive on current step
-				if (world[i][j][k].cube.visible == true) { neighbors++; }
+				if (conway_list[k + (j + i*conway.worldSize) * conway.worldSize].alive) { neighbors++; }
 			}
 		}
 	}
@@ -43,76 +81,36 @@ conway.isAliveNextStep = function (x, y, z) {
 	return true;
 }
 
-conway.drawOneStep = function () {
-	// check end of steps
-	if (conway.numOfSteps > conway.maxNumOfSteps) {
-		clearInterval(conway.loop);
-		return false;
-	}
-
-	// draw current step of conway
-	for (let x = 0; x < conway.worldSize; x++) {
-		for (let y = 0; y < conway.worldSize; y++) {
-			for (let z = 0; z < conway.worldSize; z++) {
-				// if the cube is alive it will become visible
-				if (world[x][y][z].cube.visible != world[x][y][z].isAlive) {
-					world[x][y][z].cube.visible = world[x][y][z].isAlive;
-				}
-				// calculate next step
-				world[x][y][z].isAlive = conway.isAliveNextStep(x, y, z);
-			}
-		}
-	}
-	conway.numOfSteps++;
-}
-
-conway.resetWorld = function()
-{
-	world = new Array(conway.worldSize);
-	// fill x-dim
-	for (let x = 0; x < conway.worldSize; x++) {
-		// generate y-dim
-		world[x] = new Array(conway.worldSize);
-		// fill y-dim
-		for (let y = 0; y < conway.worldSize; y++) {
-			// gen z-dim
-			world[x][y] = new Array(conway.worldSize);
-			// fill z-dim
-			for (let z = 0; z < conway.worldSize; z++) {
-				// make cube pairing, every cube should be either alive or dead
-				world[x][y][z] = { "cube": conway.genCube(x, y, z), "isAlive": false };
-			}
-		}
-	}
+conway.initialize = function() {
+	conway.reset();
 }
 
 conway.reset = function () {
 	conway.pause();
-	// gen x-dim
+	conway_list = new Array(Math.pow(conway.worldSize, 3));
+
+	for (let i = 0; i < conway_list.length; i++) {
+		conway_list[i] = {"alive": false, "aliveNext": false};
+	}
+	for (let i = 0; i < conway.initialAlive.length; i++) {
+		x = conway.initialAlive[i].x;
+		y = conway.initialAlive[i].y;
+		z = conway.initialAlive[i].z;
+
+		conway_list[z + (y + x*conway.worldSize) * conway.worldSize].alive = true;
+	}
+
 	conway.numOfSteps = 0;
 }
 
-conway.initialize = function () {
-	conway.reset();
-
-}
-
 conway.pause = function () {
-	if ("loop" in conway) {
-		clearInterval(conway.loop);
+	if("loop" in conway) {
+		clearInterval(conway.loop)
 	}
 }
 
 conway.start = function () {
-	conway.resetWorld();
-	
-	world[0][0][0].isAlive = true;
-	world[0][1][0].isAlive = true;
-	world[0][1][1].isAlive = true;
-	world[1][1][1].isAlive = true;
-	world[1][1][0].isAlive = true;
-	world[2][1][1].isAlive = true;
-	world[1][1][2].isAlive = true;
-	
+	camera.position.set(conway.worldSize * 1.65, conway.worldSize * 1.65, conway.worldSize * 1.65);
+	controls.update(); // this line should do nothing, but the algo is invisible without it for some reason
 	conway.loop = setInterval(conway.drawOneStep, conway.speed);
 }

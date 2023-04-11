@@ -4,4 +4,4 @@ topographic.size = 200;
 topographic.vertices = 10;
 topographic.frequency = 30;
 topographic.scale = 40;
-topographic.color = "0xb4eeb4";
+topographic.color = "green";

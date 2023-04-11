@@ -20,10 +20,10 @@ for (let i = 0; i < algorithms.length; i++) {
 }
 
 // algorithms3D  set up
-var algShortName3D = ["neoCity", "conway", "print10", "algsMolecular"];
-var algNames3D = ["Neo City", "Conway Game of Life", "10 print (Prototype)", "algsMolecular"];
-var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "10 print by Jean Gerard", "algsMolecular by Jean Gerard"];
-var algorithms3D = [neoCity, conway, print10, algsMolecular];
+var algShortName3D = ["neoCity", "conway", "topographic", "print10", "algsMolecular"];
+var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print (Prototype)", "algsMolecular"];
+var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "Topographic by Jake Breen", "10 print by Jean Gerard", "algsMolecular by Jean Gerard"];
+var algorithms3D = [neoCity, conway, topographic, print10, algsMolecular];
 var algorithmsPaused3D = [];
 
 for (let i = 0; i < algorithms3D.length; i++) {

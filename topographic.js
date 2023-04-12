@@ -47,6 +47,10 @@ topographic.pause = function() {
 }
 
 topographic.start = function() {
+    
+	//camera.position.set(0, topographic.size, 0); for full screen camera view and top down
+	camera.position.set(topographic.size, topographic.size+10, 0);
+	controls.target.set(0, 0, 0);
     controls.update(); // this line should do nothing, but the algo is invisible without it for some reason
 
     if (topographic.numOfSteps == 0) {

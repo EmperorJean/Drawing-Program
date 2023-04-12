@@ -21,7 +21,7 @@ for (let i = 0; i < algorithms.length; i++) {
 
 // algorithms3D  set up
 var algShortName3D = ["neoCity", "conway", "topographic", "print10", "algsMolecular"];
-var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print (Prototype)", "algsMolecular"];
+var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print", "algsMolecular"];
 var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "Topographic by Jake Breen", "10 print by Jean Gerard", "algsMolecular by Jean Gerard"];
 var algorithms3D = [neoCity, conway, topographic, print10, algsMolecular];
 var algorithmsPaused3D = [];
@@ -210,8 +210,10 @@ function clearCanvas() {
             }
         }
         
-        
-		algorithms3D[currentSelection3D - 1].initialize();
+        for( i = 0; i < algorithms3D.length; i++)
+        {
+                algorithms3D[i].initialize();
+        }
         reset();
     }else{
     ctx.clearRect(0, 0, width, height);

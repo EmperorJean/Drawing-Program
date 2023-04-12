@@ -6,10 +6,6 @@ let i, j;
 neoCity.initialize = function  () {
 	i = 0;
 	j = 0;
-	camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
-
-	// controls.target.set(0, neoCity.maxHeight + 50, 0);
-	// controls.update();
 	neoCity.reset();
 	// let s = Math.floor(Math.sqrt(neoCity.maxNumOfSteps)) * (neoCity.buildingSize + neoCity.spacing)
 	// const geometry = new BoxGeometry(s,neoCity.maxHeight,s );
@@ -79,9 +75,11 @@ neoCity.start = function () {
 	if(!animationStarted){
 		animate()
 		}
-	camera.position.set(-neoCity.citySize, neoCity.maxHeight + 70, -neoCity.citySize);
-	controls.target.set(0, neoCity.maxHeight + 50, 0);
-		controls.update();
+	camera.position.set(-neoCity.citySize, neoCity.maxHeight+50, -neoCity.citySize);
+	controls.target.set(0, neoCity.maxHeight+40, 0);
+	controls.update();
+	console.log(camera.position)
+	console.log(controls.target)
 	const geometry = new THREE.BufferGeometry();
 	const vertices = [];
 

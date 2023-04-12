@@ -111,6 +111,7 @@ conway.pause = function () {
 
 conway.start = function () {
 	camera.position.set(conway.worldSize * 1.65, conway.worldSize * 1.65, conway.worldSize * 1.65);
+	controls.target.set(0, 0, 0);
 	controls.update(); // this line should do nothing, but the algo is invisible without it for some reason
 	conway.loop = setInterval(conway.drawOneStep, conway.speed);
 }

@@ -438,6 +438,7 @@ function transformPanel(curr) {
 
         // initialize offcanvas
         $('#offcanvasRight').append($('.algo_panel').hide());
+        $('#offcanvasRight').append($('.algo3D_panel').hide());
         $('#offcanvasRight').append($('.param_panel').hide());
         $('#offcanvasRight').append($('.history_panel').hide());
         $('#offcanvasRight').append($('.about_panel').hide());
@@ -490,6 +491,7 @@ function transformPanel(curr) {
 
         // reshow panels
         $('#v-pills-algo').append($('.algo_panel').show());
+        $('#v-pills-algo3D').append($('.algo3D_panel').show());
         $('#v-pills-params').append($('.param_panel').show());
         $('#v-pills-action').append($('.history_panel').show());
         $('#v-pills-about').append($('.about_panel').show());

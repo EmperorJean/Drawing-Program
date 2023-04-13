@@ -10,9 +10,6 @@ var ii,jj,kk;
 print10.initialize = function  () {
 
 	print10.reset();
-	if(!animationStarted){
-	animate()
-	}
 }
 
 
@@ -68,7 +65,7 @@ print10.drawLine = function(a,b,c, _p) {
 			  z = z2 = 0;
 			}
 
-			const material = new THREE.LineBasicMaterial( { color: 0xFFFFFF } );
+			const material = new THREE.LineBasicMaterial( { color: print10.color } );
 			const points = [];
 			points.push( new THREE.Vector3( x, y,z ) );
 			points.push( new THREE.Vector3( x2, y2, z2 ) );
@@ -102,7 +99,7 @@ print10.start = function () {
 
     print10.maxNumOfSteps = (2*print10.dim_x) * (2*print10.dim_y) * (print10.is3d ? 2 * print10.dim_z : 0.5);
 	
-	camera.position.set(0, 0, (print10.dim_x ) + (print10.dim_y));
+	camera.position.set(0, 0, (print10.dim_x * 1.5) + (print10.dim_y * 1.5));
 	controls.target.set(0, 0, 0);
 	controls.update();
 	print10.loop =  setInterval(print10.drawOneStep, print10.speed)

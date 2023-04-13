@@ -1,35 +1,26 @@
 var neoCity = {};
 let map = [];
 let animationStarted = false;
-			
+
+
+var texture;
+
+
 let i, j;
-neoCity.initialize = function  () {
+neoCity.initialize = function () {
 	i = 0;
 	j = 0;
+
 	neoCity.reset();
-	// let s = Math.floor(Math.sqrt(neoCity.maxNumOfSteps)) * (neoCity.buildingSize + neoCity.spacing)
-	// const geometry = new BoxGeometry(s,neoCity.maxHeight,s );
-
-	// 			const material = new MeshPhongMaterial( {
-	// 				color: 0xFFD700,
-	// 				shininess: 10,
-	// 				specular: 0x111111,
-	// 				side: BackSide
-	// 			} );
-
-	// 			const mesh = new Mesh( geometry, material );
-	// 			mesh.position.y = neoCity.maxHeight/2;
-	// 			mesh.position.x = s/2
-	// 			mesh.position.z = s/2
-	// 			mesh.receiveShadow = true;
-	// 			scene.add( mesh );
+	if (!animationStarted) {
+		animate()
+	}
 }
 
 
 neoCity.drawOneStep = function () {
 	radius = (neoCity.citySize + neoCity.spacing) * (neoCity.citySize + + neoCity.spacing);
-	if(neoCity.numOfSteps >= neoCity.maxNumOfSteps)
-	{
+	if (neoCity.numOfSteps >= neoCity.maxNumOfSteps) {
 		clearInterval(neoCity.loop)
 		console.log("Completed")
 		return false;
@@ -38,64 +29,96 @@ neoCity.drawOneStep = function () {
 	scene.add(obj)
 	neoCity.numOfSteps++;
 }
-neoCity.drawBuilding = function(width, height, spacing) {
-	if(j >= Math.ceil(Math.sqrt(neoCity.maxNumOfSteps)))
-	{
+neoCity.drawBuilding = function (width, height, spacing) {
+	if (j >= Math.ceil(Math.sqrt(neoCity.maxNumOfSteps))) {
 		i++;
-		j=0;
+		j = 0;
 	}
 	j++;
-	
-	height = Math.floor(Math.random() * neoCity.maxHeight + 10);
+
+
+
+
+
+	texture = new THREE.CanvasTexture(generateTexture());
+	texture.magFilter = THREE.NearestFilter;
+	texture.wrapT = THREE.RepeatWrapping;
+	texture.wrapS = THREE.RepeatWrapping;
+	texture.repeat.set(Math.random() * 1 + 2, Math.random() * 2 + 4);
+	height = Math.floor(Math.random() * (neoCity.maxHeight-neoCity.minHeight) + neoCity.minHeight);
+	let l = new THREE.Group()
 	let geometry = new THREE.BoxGeometry(width, height, width)
-	let object = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff }));
+	let col = Math.random() * 0xffffff;
+	let material = new THREE.MeshBasicMaterial({ color: col });
+	let object = new THREE.Mesh(geometry, material);
+
 	object.position.x = (width + spacing) * i
 	object.position.z = (width + spacing) * j
-	object.position.y = height/2
+	object.position.y = height / 2
 
-	
-	return object;
+	l.add(object);
+	if (neoCity.windows) {
+		const materials = [
+			new THREE.MeshBasicMaterial({ map: texture, color: col }), // Left side (with repeat)
+			new THREE.MeshBasicMaterial({ map: texture, color: col }), // Right side (with repeat)
+			new THREE.MeshBasicMaterial({ color: 0x000000 }), // Top side (no texture)
+			new THREE.MeshBasicMaterial({ map: texture, color: col }), // Bottom side (with repeat)
+			new THREE.MeshBasicMaterial({ map: texture, color: col }), // Front side (with repeat)
+			new THREE.MeshBasicMaterial({ map: texture, color: col }), // Back side (with repeat)
+		];
+
+		geometry = new THREE.BoxGeometry(width, height, width)
+		object = new THREE.Mesh(geometry, materials);
+		object.position.x = (width + spacing) * i
+		object.position.z = (width + spacing) * j
+		object.position.y = height / 2
+		l.add(object);
+	}
+	return l;
 }
 
 neoCity.reset = function () {
+	j = 0, i = 0;
 	neoCity.pause();
 	neoCity.numOfSteps = 0;
 }
 
 neoCity.pause = function () {
-	if("loop" in neoCity) {
+	if ("loop" in neoCity) {
 		clearInterval(neoCity.loop)
 	}
 }
 
 neoCity.start = function () {
-
-
-
-	if(!animationStarted){
-		animate()
-		}
-	camera.position.set(-neoCity.citySize, neoCity.maxHeight+50, -neoCity.citySize);
-	controls.target.set(0, neoCity.maxHeight+40, 0);
+	camera.position.set(0, neoCity.maxHeight + 50, 0);
+	controls.target.set(neoCity.maxHeight / 3, neoCity.maxHeight + 10, neoCity.maxHeight / 3);
 	controls.update();
-	console.log(camera.position)
-	console.log(controls.target)
+
+	if (neoCity.sun) {
+		const sunGeometry = new THREE.SphereGeometry(neoCity.sunRadius, 32, 32);
+		const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, emissive: 0xffa000 });
+		const sun = new THREE.Mesh(sunGeometry, sunMaterial);
+		sun.position.set(neoCity.maxNumOfSteps  * neoCity.spacing + neoCity.sunRadius, neoCity.maxHeight + neoCity.sunRadius, neoCity.maxNumOfSteps * neoCity.spacing + neoCity.sunRadius); // Set the position of the sun object
+		scene.add(sun);
+	}
+
+
 	const geometry = new THREE.BufferGeometry();
 	const vertices = [];
 
-	for ( let i = 0; i < 10000; i ++ ) {
+	for (let i = 0; i < 10000; i++) {
 
-		vertices.push( THREE.MathUtils.randFloatSpread( 2000 ) ); // x
-		vertices.push( THREE.MathUtils.randFloatSpread( 2000 ) ); // y
-		vertices.push( THREE.MathUtils.randFloatSpread( 2000 ) ); // z
+		vertices.push(THREE.MathUtils.randFloatSpread(2000)); // x
+		vertices.push(THREE.MathUtils.randFloatSpread(2000)); // y
+		vertices.push(THREE.MathUtils.randFloatSpread(2000)); // z
 
 	}
 
-	geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+	geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-	const particles = new THREE.Points( geometry, new THREE.PointsMaterial( { color: 0x888888 } ) );
-	scene.add( particles );
-	neoCity.loop =  setInterval(neoCity.drawOneStep, neoCity.speed)
+	const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0xFFFFFF }));
+	scene.add(particles);
+	neoCity.loop = setInterval(neoCity.drawOneStep, neoCity.speed)
 }
 
 
@@ -109,16 +132,15 @@ function animate() {
 function render() {
 
 	let time = performance.now() * 0.001;
-	time += 10000;	
+	time += 10000;
 	renderer.render(scene, camera);
 	let spd = .5;
 
 
-	if(neoCity.scrolling)
-	{
+	if (neoCity.scrolling) {
 
-	camera.position.x += spd;
-	camera.position.z += spd
+		camera.position.x += spd;
+		camera.position.z += spd
 	}
 	//stats.update();
 
@@ -127,3 +149,16 @@ function render() {
 
 
 
+function generateTexture() {
+
+	const canvas = document.createElement('canvas');
+	canvas.width = 4;
+	canvas.height = 4;
+
+	const context = canvas.getContext('2d');
+	context.fillStyle = 'white';
+	context.fillRect(1, 2, 2, 3);
+
+	return canvas;
+
+}

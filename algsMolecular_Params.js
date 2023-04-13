@@ -1,8 +1,10 @@
 /* Parameters */
 algsMolecular.speed = 0;
-algsMolecular.maxNumOfSteps = 50;
-algsMolecular.sphereRadiusMax = 20;
-algsMolecular.sphereRadiusMin = 15;
-algsMolecular.maxLineLength = 50;
-algsMolecular.minLineLength = 25;
-algsMolecular.lineThickness = 50;
+algsMolecular.maxNumOfSteps = 500;
+algsMolecular.sphereRadiusMax = 4;
+algsMolecular.sphereRadiusMin = 4;
+algsMolecular.maxLineLength = 10;
+algsMolecular.minLineLength = 5;
+algsMolecular.dim_x = 600;
+algsMolecular.dim_y = 600;
+algsMolecular.dim_z = 600;

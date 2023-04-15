@@ -20,10 +20,10 @@ for (let i = 0; i < algorithms.length; i++) {
 }
 
 // algorithms3D  set up
-var algShortName3D = ["neoCity", "conway", "topographic", "print10", "algsMolecular"];
-var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print", "algsMolecular"];
-var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "Topographic by Jake Breen", "10 print by Jean Gerard", "algsMolecular by Jean Gerard"];
-var algorithms3D = [neoCity, conway, topographic, print10, algsMolecular];
+var algShortName3D = ["neoCity", "conway", "topographic", "print10", "constellations", "blockWorld"];
+var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print", "constellations", "blockWorld"];
+var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "Topographic by Jake Breen", "10 print by Jean Gerard", "constellations by Jean Gerard", "Block World by Jean"];
+var algorithms3D = [neoCity, conway, topographic, print10, constellations, blockWorld];
 var algorithmsPaused3D = [];
 
 for (let i = 0; i < algorithms3D.length; i++) {
@@ -394,7 +394,6 @@ function param_not_display(curr_params) {
 
 // parameter panel subtitle update
 function algoNameUpdate(currentSelection) {
-    console.log("Is3D: " + canvas3D)
     if(canvas3D)
     {
         $('.current_algo').text(algNames3D[currentSelection3D - 1]);

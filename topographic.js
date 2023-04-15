@@ -18,7 +18,7 @@ topographic.drawOneStep = function() {
         v.fromBufferAttribute(geometry.attributes.uv, vertice).multiplyScalar(topographic.frequency);
         let h = topographic.scale * noise(v.x, v.y);
         geometry.attributes.position.setY(vertice, h);
-        console.log('finished vertice: ' + vertice + ' on step: ' + topographic.numOfSteps);
+        // console.log('finished vertice: ' + vertice + ' on step: ' + topographic.numOfSteps);
     }
     geometry.computeVertexNormals();
     geometry.attributes.position.needsUpdate = true;

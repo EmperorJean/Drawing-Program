@@ -49,8 +49,6 @@ function createCard3D(algId) {
                     </div>\
                 </div>';
     document.getElementById("alg3D-cards").innerHTML += code;
-
-    console.log("Creating " + algNames3D[algId - 1])
 }
 // Initialize cards
 for(let i = 1; i <= algNames3D.length; i++) {

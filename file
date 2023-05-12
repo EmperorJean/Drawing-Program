@@ -1,0 +1,31 @@
+var fileName= {};
+
+fileName.drawOneStep = function () {
+    // draw one step goes here
+}
+
+
+fileName.initialize = function() {
+	fileName.reset();
+}
+
+fileName.reset = function () {
+	fileName.pause();
+
+	fileName.numOfSteps = 0;
+}
+
+fileName.pause = function () {
+	if("loop" in fileName) {
+		clearInterval(fileName.loop)
+	}
+}
+
+fileName.start = function () {
+	camera.position.set(0,0,0);
+	controls.target.set(0, 0, 0);
+	controls.update(); // this line should do nothing, but the algo is invisible without it for some reason
+	fileName.loop = setInterval(fileName.drawOneStep, fileName.speed);
+
+    // code goes here
+}

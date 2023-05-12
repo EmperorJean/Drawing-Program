@@ -18,7 +18,6 @@ print10.drawOneStep = function () {
 	if(print10.numOfSteps >= print10.maxNumOfSteps)
 	{
 		clearInterval(neoCity.loop)
-		console.log("Completed")
 		return false;
 	}
 

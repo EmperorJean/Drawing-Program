@@ -22,11 +22,15 @@ neoCity.drawOneStep = function () {
 	radius = (neoCity.citySize + neoCity.spacing) * (neoCity.citySize + + neoCity.spacing);
 	if (neoCity.numOfSteps >= neoCity.maxNumOfSteps) {
 		clearInterval(neoCity.loop)
-		console.log("Completed")
 		return false;
 	}
 	let obj = neoCity.drawBuilding(neoCity.buildingSize, neoCity.maxHeight, neoCity.spacing)
 	scene.add(obj)
+	if (j > 1) {
+        const road = neoCity.drawRoad(neoCity.buildingSize, neoCity.spacing, neoCity.spacing);
+        scene.add(road);
+    }
+	
 	neoCity.numOfSteps++;
 }
 neoCity.drawBuilding = function (width, height, spacing) {
@@ -147,6 +151,20 @@ function render() {
 }
 
 
+neoCity.drawRoad = function (width, length, spacing) {
+    const roadWidth = width;
+    const roadLength = length;
+    const roadHeight = 0.5;
+    const roadGeometry = new THREE.BoxGeometry(roadWidth, roadHeight, roadLength);
+    const roadMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
+    const road = new THREE.Mesh(roadGeometry, roadMaterial);
+
+    road.position.x = (width + spacing) * i + (width / 2);
+    road.position.z = (width + spacing) * (j - 1) + (width / 2);
+    road.position.y = -roadHeight / 2;
+
+    return road;
+};
 
 
 function generateTexture() {

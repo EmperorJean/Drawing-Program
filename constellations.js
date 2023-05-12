@@ -19,7 +19,6 @@ var constellations = {};
   constellations.drawOneStep = function() {
     if (constellations.numOfSteps >= constellations.maxNumOfSteps) {
       clearInterval(constellations.loop);
-      console.log("Completed");
       return false;
     }
   

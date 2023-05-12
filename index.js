@@ -20,10 +20,10 @@ for (let i = 0; i < algorithms.length; i++) {
 }
 
 // algorithms3D  set up
-var algShortName3D = ["neoCity", "conway", "topographic", "print10", "constellations", "blockWorld"];
-var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print", "constellations", "blockWorld"];
-var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "Topographic by Jake Breen", "10 print by Jean Gerard", "constellations by Jean Gerard", "Block World by Jean"];
-var algorithms3D = [neoCity, conway, topographic, print10, constellations, blockWorld];
+var algShortName3D = ["neoCity", "conway", "topographic", "print10", "constellations", "blockWorld", "spirals"];
+var algNames3D = ["Neo City", "Conway Game of Life", "Topographic", "10 print", "constellations", "Block World", "Spirals"];
+var algCredits3D = ["NeoCity By Jean Gerard", "Conway Game of Life by Jake Breen", "Topographic by Jake Breen", "10 print by Jean Gerard", "constellations by Jean Gerard", "Block World by Jean Gerard", "Spirals by Jean"];
+var algorithms3D = [neoCity, conway, topographic, print10, constellations, blockWorld, spirals];
 var algorithmsPaused3D = [];
 
 for (let i = 0; i < algorithms3D.length; i++) {

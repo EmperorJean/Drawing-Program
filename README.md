@@ -64,7 +64,9 @@ Goal was to implement 3D artwork onto the clients' existing UI, Creator Studio. 
 ### Technology
 The algorithms are designed in JavaScript and drawn using Three.js on a WebGL canvas. Everything is done onto a version of the Creator Studio with no network calls, every file is accessible directly from the webpage.
 
-### Prototypes
+
+## Prototypes
+
 
 #### Neocity (by Jean)
 
@@ -76,31 +78,34 @@ Example Drawing:
 
 <img src = "readme_images/neocity.png" alt = "Neocity (Jean)" width = "400" height = "400">
 
+
 #### Constellation (by Jean)
 
 #### Made using Three.js
 
-[Add writeup here] 
+Formally meant to be molecular, constellations took a life of its own. This algorithm is inspired by the constellations that have been created by people connecting stars to one another. The user is able to set the color, whether the stars are visible and other settings to create custom constellations that they’ll be able to share. 
 
 Example Drawing:
 
 <img src = "readme_images/constellation.PNG" alt = "Constellation (Jean)" width = "400" height = "400">
 
+
 #### Spiral (by Jean)
 
 #### Made using Three.js
 
-[Add writeup here] 
+Spirals is a cool 2D but on a 3D plane piece of art that is made using spirals. The user can control aspects of the spirals allowing them to have varying pieces of art generated and with them being able to select their color as well, they are able to get their own spirals just how’d they like.  
 
 Example Drawing:
 
 <img src = "readme_images/spiral.PNG" alt = "Spiral (Jean)" width = "400" height = "400">
 
+
 #### Blockworld (by Jean)
 
 #### Made using Three.js
 
-[Add writeup here] 
+Inspired by the popular video game, Minecraft, blockworld allows the user to generate these randomly generated worlds made entirely of blocks. The user is able to set the world size and the colors of the three blocks and how random the blocks are placed.
 
 Example Drawing:
 
@@ -116,6 +121,7 @@ A 3D take on Conway’s game of life. The user sets a rule that determines wheth
 Example Drawing:
 
 <img src = "readme_images/conway.PNG" alt = "Conway (Jake)" width = "400" height = "400">
+
 
 #### Topographic (by Jake)
 

@@ -74,7 +74,7 @@ This algorithm generates neon buildings in a city defined by the number of steps
 
 Example Drawing:
 
-<img src = "readme_images/neocity.png" alt = "Neocity (Jean)" width = "400" height = "300">
+<img src = "readme_images/neocity.png" alt = "Neocity (Jean)" width = "400" height = "400">
 
 #### Constellation (by Jean)
 
@@ -84,7 +84,7 @@ Example Drawing:
 
 Example Drawing:
 
-<img src = "readme_images/constellation.PNG" alt = "Constellation (Jean)" width = "400" height = "300">
+<img src = "readme_images/constellation.PNG" alt = "Constellation (Jean)" width = "400" height = "400">
 
 #### Spiral (by Jean)
 
@@ -104,7 +104,7 @@ Example Drawing:
 
 Example Drawing:
 
-<img src = "readme_images/blockworld.PNG" alt = "Blockworld (Jean)" width = "400" height = "300">
+<img src = "readme_images/blockworld.PNG" alt = "Blockworld (Jean)" width = "400" height = "400">
 
 
 #### Conway Game of Life 3D (by Jake)
@@ -115,7 +115,7 @@ A 3D take on Conway’s game of life. The user sets a rule that determines wheth
 
 Example Drawing:
 
-<img src = "readme_images/conway.PNG" alt = "Conway (Jake)" width = "400" height = "300">
+<img src = "readme_images/conway.PNG" alt = "Conway (Jake)" width = "400" height = "400">
 
 #### Topographic (by Jake)
 
@@ -125,7 +125,7 @@ Generates a flat plane that has a set of vertices that can be manipulated to mak
 
 Example Drawing:
 
-<img src = "readme_images/topographic.PNG" alt = "Topographic (Jake)" width = "400" height = "300">
+<img src = "readme_images/topographic.PNG" alt = "Topographic (Jake)" width = "400" height = "400">
 
 
 

@@ -94,7 +94,7 @@ Example Drawing:
 
 Example Drawing:
 
-<img src = "readme_images/spiral.PNG" alt = "Spiral (Jean)" width = "400" height = "300">
+<img src = "readme_images/spiral.PNG" alt = "Spiral (Jean)" width = "400" height = "400">
 
 #### Blockworld (by Jean)
 

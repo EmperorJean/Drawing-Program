@@ -74,7 +74,7 @@ This algorithm generates neon buildings in a city defined by the number of steps
 
 Example Drawing:
 
-![Neocity (Jean)](readme_images\neocity.png)
+<img src = "readme_images/neocity.png" alt = "Neocity (Jean)" width = "400" height = "300">
 
 #### Constellation (by Jean)
 

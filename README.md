@@ -90,6 +90,7 @@ Example Drawing:
 
 <img src = "readme_images/constellation.PNG" alt = "Constellation (Jean)" width = "400" height = "400">
 
+<br>
 
 #### Spiral (by Jean)
 
@@ -101,6 +102,7 @@ Example Drawing:
 
 <img src = "readme_images/spiral.PNG" alt = "Spiral (Jean)" width = "400" height = "400">
 
+<br>
 
 #### Blockworld (by Jean)
 
@@ -112,6 +114,7 @@ Example Drawing:
 
 <img src = "readme_images/blockworld.PNG" alt = "Blockworld (Jean)" width = "400" height = "400">
 
+<br>
 
 #### Conway Game of Life 3D (by Jake)
 
@@ -123,6 +126,7 @@ Example Drawing:
 
 <img src = "readme_images/conway.PNG" alt = "Conway (Jake)" width = "400" height = "400">
 
+<br>
 
 #### Topographic (by Jake)
 
@@ -133,7 +137,6 @@ Generates a flat plane that has a set of vertices that can be manipulated to mak
 Example Drawing:
 
 <img src = "readme_images/topographic.PNG" alt = "Topographic (Jake)" width = "400" height = "400">
-
 
 
 

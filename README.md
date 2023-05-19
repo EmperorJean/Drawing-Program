@@ -27,6 +27,8 @@
 
 ## Our Algorithms
 
+## 2D implmentation
+
 ### algDots (Simple Example)
 
 This is a sample drawing algorithm that is meant for viewers to understand the programming framework that is used to create a new drawing algorithm.  We encourage you to clone our repo and try modifying this code to build your own drawing algorithm.  If you do so, **please consider sharing your resulting artworks with us** and [submit a pull request](https://github.com/Algorithmically-Generated-Artwork/Drawing-Program/pulls)!
@@ -54,6 +56,79 @@ Example Drawing:
 ![algVines Animation](https://github.com/Algorithmically-Generated-Artwork/Drawing-Program/blob/main/readme_images/algVines.gif)
 
 Blog Article: https://michaelwehar.wordpress.com/2022/07/23/algorithmically-generated-visual-designs-5-vines/
+
+## 3D implementation (Umass Boston, CS410)
+
+Goal was to implement 3D artwork onto the clients' existing UI, Creator Studio. These artworks draw onto a WebGL canvas with similar features as in 2D artworks.
+
+### Technology
+The algorithms are designed in JavaScript and drawn using Three.js on a WebGL canvas. Everything is done onto a version of the Creator Studio with no network calls, every file is accessible directly from the webpage.
+
+### Prototypes
+
+#### Neocity (by Jean)
+
+#### Made using Three.js
+
+This algorithm generates neon buildings in a city defined by the number of steps the user defines. The user can customize the maximum height of the builds, the size of the buildings, the spacing between them, and also get a scrolling effect by ticking the scrolling checkmark in the parameters. 
+
+Example Drawing:
+
+![Neocity (Jean)](readme_images\neocity.png)
+
+#### Constellation (by Jean)
+
+#### Made using Three.js
+
+[Add writeup here] 
+
+Example Drawing:
+
+![Constellation (Jean)](readme_images\constellation.PNG)
+
+#### Spiral (by Jean)
+
+#### Made using Three.js
+
+[Add writeup here] 
+
+Example Drawing:
+
+![Spiral (Jean)](readme_images\spiral.PNG)
+
+#### Blockworld (by Jean)
+
+#### Made using Three.js
+
+[Add writeup here] 
+
+Example Drawing:
+
+![Blockworld (Jean)](readme_images\blockworld.PNG)
+
+
+#### Conway Game of Life 3D (by Jake)
+
+#### Made using Three.js
+
+A 3D take on Conway’s game of life. The user sets a rule that determines whether a cube is alive or dead and by choosing which cubes are alive at the beginning, cool patterns can be created. 
+
+Example Drawing:
+
+![Conway (Jake)](readme_images\conway.PNG)
+
+#### Topographic (by Jake)
+
+#### Made using Three.js
+
+Generates a flat plane that has a set of vertices that can be manipulated to make the plan nonlinear. Using perlin noise we manipulate these vertices to create a topographic map that can be viewed in a 3D space. The user can set parameters such as number of vertices, as well as the frequency and max height of hills. 
+
+Example Drawing:
+
+![Topographic (Jake)](readme_images\topographic.PNG)
+
+
+
 
 ## Articles & Links
 
@@ -91,6 +166,14 @@ Blog Article: https://michaelwehar.wordpress.com/2022/07/23/algorithmically-gene
 - John Mancini
 - Maya Newman-Toker
 - Alyssa Zhang
+
+*Umass Boston, CS410 Team*
+
+- Jake Breen
+- Jean Gerard
+- Prateeksha Bhojaraj
+- Richard Chang
+
 
 *Special thanks to all friends and collaborators who offered help!*
 

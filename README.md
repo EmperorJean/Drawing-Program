@@ -84,7 +84,7 @@ Example Drawing:
 
 Example Drawing:
 
-![Constellation (Jean)](readme_images\constellation.PNG)
+<img src = "readme_images/constellation.PNG" alt = "Constellation (Jean)" width = "400" height = "300">
 
 #### Spiral (by Jean)
 
@@ -94,7 +94,7 @@ Example Drawing:
 
 Example Drawing:
 
-![Spiral (Jean)](readme_images\spiral.PNG)
+<img src = "readme_images/spiral.PNG" alt = "Spiral (Jean)" width = "400" height = "300">
 
 #### Blockworld (by Jean)
 
@@ -104,7 +104,7 @@ Example Drawing:
 
 Example Drawing:
 
-![Blockworld (Jean)](readme_images\blockworld.PNG)
+<img src = "readme_images/blockworld.PNG" alt = "Blockworld (Jean)" width = "400" height = "300">
 
 
 #### Conway Game of Life 3D (by Jake)
@@ -115,7 +115,7 @@ A 3D take on Conway’s game of life. The user sets a rule that determines wheth
 
 Example Drawing:
 
-![Conway (Jake)](readme_images\conway.PNG)
+<img src = "readme_images/conway.PNG" alt = "Conway (Jake)" width = "400" height = "300">
 
 #### Topographic (by Jake)
 
@@ -125,7 +125,7 @@ Generates a flat plane that has a set of vertices that can be manipulated to mak
 
 Example Drawing:
 
-![Topographic (Jake)](readme_images\topographic.PNG)
+<img src = "readme_images/topographic.PNG" alt = "Topographic (Jake)" width = "400" height = "300">
 
 
 

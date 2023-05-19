@@ -61,7 +61,7 @@ Blog Article: https://michaelwehar.wordpress.com/2022/07/23/algorithmically-gene
 
 Goal was to implement 3D artwork onto the clients' existing UI, Creator Studio. These artworks draw onto a WebGL canvas with similar features as in 2D artworks.
 
-### Technology
+## Technology
 The algorithms are designed in JavaScript and drawn using Three.js on a WebGL canvas. Everything is done onto a version of the Creator Studio with no network calls, every file is accessible directly from the webpage.
 
 
@@ -78,6 +78,7 @@ Example Drawing:
 
 <img src = "readme_images/neocity.png" alt = "Neocity (Jean)" width = "400" height = "400">
 
+<br>
 
 #### Constellation (by Jean)
 
